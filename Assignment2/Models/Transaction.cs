@@ -13,7 +13,7 @@ public enum TransactionType
 
 public class Transaction
 {
-    [Required]
+    [Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int TransactionID { get; set; }
 
     [Required]

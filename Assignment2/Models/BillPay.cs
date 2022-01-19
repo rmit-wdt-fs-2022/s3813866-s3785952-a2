@@ -11,7 +11,7 @@ public enum Period
 
 public class BillPay
 {
-    [Required]
+    [Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int BillPayID { get; set; }
     
     [Required, ForeignKey("Account")]
