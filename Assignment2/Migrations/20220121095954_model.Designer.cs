@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment2.Migrations
 {
     [DbContext(typeof(ModelDbContext))]
-    [Migration("20220121042531_model")]
+    [Migration("20220121095954_model")]
     partial class model
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,11 +29,9 @@ namespace Assignment2.Migrations
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("AccountType")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Balance")
-                        .HasColumnType("money");
+                    b.Property<string>("AccountType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
@@ -79,12 +77,10 @@ namespace Assignment2.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Mobile")
-                        .IsRequired()
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 
@@ -94,22 +90,18 @@ namespace Assignment2.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PostCode")
-                        .IsRequired()
                         .HasMaxLength(4)
                         .HasColumnType("nvarchar(4)");
 
-                    b.Property<string>("Postcode")
-                        .IsRequired()
+                    b.Property<string>("State")
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
 
                     b.Property<string>("Suburb")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("TFN")
-                        .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
@@ -134,7 +126,8 @@ namespace Assignment2.Migrations
 
                     b.HasKey("LoginId");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId")
+                        .IsUnique();
 
                     b.ToTable("Login");
                 });
@@ -206,8 +199,9 @@ namespace Assignment2.Migrations
                     b.Property<DateTime>("TransactionTimeUtc")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TransactionType")
-                        .HasColumnType("int");
+                    b.Property<string>("TransactionType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
 
                     b.HasKey("TransactionId");
 
@@ -221,7 +215,7 @@ namespace Assignment2.Migrations
             modelBuilder.Entity("Assignment2.Models.Account", b =>
                 {
                     b.HasOne("Assignment2.Models.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Accounts")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -232,8 +226,8 @@ namespace Assignment2.Migrations
             modelBuilder.Entity("Assignment2.Models.Login", b =>
                 {
                     b.HasOne("Assignment2.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
+                        .WithOne("Login")
+                        .HasForeignKey("Assignment2.Models.Login", "CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -243,7 +237,7 @@ namespace Assignment2.Migrations
             modelBuilder.Entity("Assignment2.Models.Transaction", b =>
                 {
                     b.HasOne("Assignment2.Models.Account", "Account")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("AccountNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -255,6 +249,19 @@ namespace Assignment2.Migrations
                     b.Navigation("Account");
 
                     b.Navigation("DestinationAccount");
+                });
+
+            modelBuilder.Entity("Assignment2.Models.Account", b =>
+                {
+                    b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("Assignment2.Models.Customer", b =>
+                {
+                    b.Navigation("Accounts");
+
+                    b.Navigation("Login")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -58,3 +58,8 @@ C:\Users\User\Documents\GitHub\s3813866-s3785952-a2\Assignment2\obj\Debug\net6.0
 C:\Users\User\Documents\GitHub\s3813866-s3785952-a2\Assignment2\obj\Debug\net6.0\ref\Assignment2.dll
 C:\Users\User\Documents\GitHub\s3813866-s3785952-a2\Assignment2\obj\Debug\net6.0\Assignment2.pdb
 C:\Users\User\Documents\GitHub\s3813866-s3785952-a2\Assignment2\obj\Debug\net6.0\Assignment2.genruntimeconfig.cache
+C:\Users\User\Documents\GitHub\s3813866-s3785952-a2\Assignment2\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+C:\Users\User\Documents\GitHub\s3813866-s3785952-a2\Assignment2\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\User\Documents\GitHub\s3813866-s3785952-a2\Assignment2\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\User\Documents\GitHub\s3813866-s3785952-a2\Assignment2\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\User\Documents\GitHub\s3813866-s3785952-a2\Assignment2\bin\Debug\net6.0\System.Runtime.CompilerServices.Unsafe.dll
