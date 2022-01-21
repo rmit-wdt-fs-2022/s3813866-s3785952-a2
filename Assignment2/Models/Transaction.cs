@@ -14,7 +14,7 @@ public enum TransactionType
 public class Transaction
 {
     [Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int TransactionID { get; set; }
+    public int TransactionId { get; set; }
 
     [Required]
     public TransactionType TransactionType { get; set; }
@@ -25,13 +25,13 @@ public class Transaction
 
     [ForeignKey("DestinationAccount")]
     public int? DestinationAccountNumber { get; set; }
-    public virtual Account DestinationAccount { get; set; }
+    public virtual Account? DestinationAccount { get; set; }
 
     [Required, Column(TypeName = "money")]
     public decimal Amount { get; set; }
 
     [StringLength(30)]
-    public string Comment { get; set; }
+    public string? Comment { get; set; }
 
     [Required]
     public DateTime TransactionTimeUtc { get; set; }

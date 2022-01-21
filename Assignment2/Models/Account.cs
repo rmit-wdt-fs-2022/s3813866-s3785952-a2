@@ -20,7 +20,7 @@ public class Account
     public AccountType AccountType { get; set; }
 
     [Required]
-    public int CustomerID { get; set; }
+    public int CustomerId { get; set; }
     
     public virtual Customer Customer { get; set; }
 

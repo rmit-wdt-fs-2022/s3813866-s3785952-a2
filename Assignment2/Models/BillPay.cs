@@ -12,15 +12,15 @@ public enum Period
 public class BillPay
 {
     [Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int BillPayID { get; set; }
+    public int BillPayId { get; set; }
     
     [Required, ForeignKey("Account")]
     public int AccountNumber { get; set; }
     
     [Required, ForeignKey("Payee")]
-    public int PayeeID { get; set; }
+    public int PayeeId { get; set; }
     
-    [Required]
+    [Required, Column(TypeName = "money")]
     public decimal Amount {get; set;}
     
     [Required]

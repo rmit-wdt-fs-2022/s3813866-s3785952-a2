@@ -6,7 +6,7 @@ namespace Assignment2.Models;
 public class Customer
 {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
-    public int CustomerID { get; set; }
+    public int CustomerId { get; set; }
 
     [Required, StringLength(50)]
     

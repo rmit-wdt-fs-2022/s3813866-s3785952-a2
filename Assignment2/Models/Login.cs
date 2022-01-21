@@ -7,11 +7,11 @@ public class Login
 {
     [Column(TypeName = "char")]
     [StringLength(8)]
-    public string LoginID { get; set; }
+    public string LoginId { get; set; }
 
     [Required]
     [ForeignKey("Customer")]
-    public int CustomerID { get; set; }
+    public int CustomerId { get; set; }
     
     public virtual Customer Customer { get; set; }
 

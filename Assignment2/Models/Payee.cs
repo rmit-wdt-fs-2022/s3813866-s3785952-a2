@@ -6,7 +6,7 @@ namespace Assignment2.Models;
 public class Payee
 {
     [Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int PayeeID { get; set; }
+    public int PayeeId { get; set; }
     
     [Required, StringLength(50)]
     public string Name { get; set; }
