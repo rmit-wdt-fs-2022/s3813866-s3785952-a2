@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Assignment2.Models;
 
-public enum AccountType
-{
-    Checking = 1,
-    Saving = 2
-}
+// public enum AccountType
+// {
+//     Checking = 'C',
+//     Saving = 'S'
+// }
 
 public class Account
 {
@@ -17,17 +17,13 @@ public class Account
     public int AccountNumber { get; set; }
 
     [Required ,Display(Name = "Type")]
-    public AccountType AccountType { get; set; }
+    public char AccountType { get; set; }
 
     [Required]
     public int CustomerId { get; set; }
     
     public virtual Customer Customer { get; set; }
-
-    [Column(TypeName = "money")]
-    [DataType(DataType.Currency)]
-    public decimal Balance { get; set; }
     
-    //[InverseProperty("Account")]
-    // public virtual List<Transaction> Transactions { get; set; }
+    [InverseProperty("Account")]
+     public virtual List<Transaction> Transactions { get; set; }
 }

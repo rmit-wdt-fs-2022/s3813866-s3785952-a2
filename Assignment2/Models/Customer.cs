@@ -9,26 +9,27 @@ public class Customer
     public int CustomerId { get; set; }
 
     [Required, StringLength(50)]
-    
     public string Name { get; set; }
     
     [StringLength(11)]
-    public string TFN { get; set; }
+    public string? TFN { get; set; }
 
     [StringLength(50)]
-    public string Address { get; set; }
+    public string? Address { get; set; }
 
     [StringLength(40)]
-    public string Suburb { get; set; }
+    public string? Suburb { get; set; }
     
     [StringLength(3)]
-    public string Postcode { get; set; }
+    public string? State { get; set; }
 
     [StringLength(4)]
-    public string PostCode { get; set; }
+    public string? PostCode { get; set; }
     
     [StringLength(12)]
-    public string Mobile { get; set; }
+    public string? Mobile { get; set; }
 
-    // public virtual List<Account> Accounts { get; set; }
+    public virtual List<Account> Accounts { get; set; }
+    
+    public virtual Login Login { get; set; }
 }

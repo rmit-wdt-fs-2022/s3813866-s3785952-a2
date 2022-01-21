@@ -32,12 +32,12 @@ namespace Assignment2.Migrations
                 {
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    TFN = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Suburb = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    Postcode = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
-                    PostCode = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
-                    Mobile = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false)
+                    TFN = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Suburb = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    State = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: true),
+                    PostCode = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: true),
+                    Mobile = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,9 +67,8 @@ namespace Assignment2.Migrations
                 columns: table => new
                 {
                     AccountNumber = table.Column<int>(type: "int", nullable: false),
-                    AccountType = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    Balance = table.Column<decimal>(type: "money", nullable: false)
+                    AccountType = table.Column<string>(type: "nvarchar(1)", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,7 +106,7 @@ namespace Assignment2.Migrations
                 {
                     TransactionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TransactionType = table.Column<int>(type: "int", nullable: false),
+                    TransactionType = table.Column<string>(type: "nvarchar(1)", nullable: false),
                     AccountNumber = table.Column<int>(type: "int", nullable: false),
                     DestinationAccountNumber = table.Column<int>(type: "int", nullable: true),
                     Amount = table.Column<decimal>(type: "money", nullable: false),
@@ -138,7 +137,8 @@ namespace Assignment2.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Login_CustomerId",
                 table: "Login",
-                column: "CustomerId");
+                column: "CustomerId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transaction_AccountNumber",
