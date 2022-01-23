@@ -10,6 +10,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ModelDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Main")));
 
+
+//Store sessions
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.IsEssential = true;
+});
+
+
 var app = builder.Build();
 
 using(var scope = app.Services.CreateScope())
@@ -41,6 +50,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
