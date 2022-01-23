@@ -13,7 +13,7 @@ public class Login
     [ForeignKey("Customer")]
     public int CustomerId { get; set; }
     
-    public virtual Customer Customer { get; set; }
+    public virtual Customer? Customer { get; set; }
 
     [Column(TypeName = "char")]
     [Required, StringLength(64)]

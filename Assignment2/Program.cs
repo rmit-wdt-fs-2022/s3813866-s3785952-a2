@@ -8,7 +8,10 @@ builder.Services.AddControllersWithViews();
 
 //establish tables for model
 builder.Services.AddDbContext<ModelDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Main")));
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Main"));
+        options.UseLazyLoadingProxies();
+    });
 
 
 //Store sessions
