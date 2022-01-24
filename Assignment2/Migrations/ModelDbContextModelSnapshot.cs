@@ -258,8 +258,7 @@ namespace Assignment2.Migrations
                 {
                     b.Navigation("Accounts");
 
-                    b.Navigation("Login")
-                        .IsRequired();
+                    b.Navigation("Login");
                 });
 #pragma warning restore 612, 618
         }

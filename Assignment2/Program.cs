@@ -8,7 +8,19 @@ builder.Services.AddControllersWithViews();
 
 //establish tables for model
 builder.Services.AddDbContext<ModelDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Main")));
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("Main"));
+        options.UseLazyLoadingProxies();
+    });
+
+
+//Store sessions
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.IsEssential = true;
+});
+
 
 var app = builder.Build();
 
@@ -41,6 +53,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
