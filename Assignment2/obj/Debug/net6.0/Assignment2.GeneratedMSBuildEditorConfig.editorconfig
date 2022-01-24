@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\User\Documents\GitHub\s3813866-s3785952-a2\Assignment2
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/User/Documents/GitHub/s3813866-s3785952-a2/Assignment2/Views/Customer/Deposit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcRGVwb3NpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/Documents/GitHub/s3813866-s3785952-a2/Assignment2/Views/Customer/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3VzdG9tZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
