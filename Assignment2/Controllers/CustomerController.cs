@@ -59,6 +59,9 @@ public class CustomerController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    public async Task<IActionResult> Withdraw(int id) => View(await _context.Account.FindAsync(id));
+    
+    [HttpPost]
     public async Task<IActionResult> Withdraw(int id, decimal amount)
     {
         var account = await _context.Account.FindAsync(id);
@@ -67,6 +70,10 @@ public class CustomerController : Controller
             ModelState.AddModelError(nameof(amount), "Amount must be positive.");
         if (amount.TwoDecimalPlacesCheck())
             ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
+        if (account.Transactions.CalculateAccountBalance() - amount < 0)
+        {
+            
+        }
         if (!ModelState.IsValid)
         {
             ViewBag.Amount = amount;
@@ -80,6 +87,12 @@ public class CustomerController : Controller
                 Amount = amount,
                 TransactionTimeUtc = DateTime.UtcNow
             });
+        account.Transactions.Add( new Transaction
+        {
+            TransactionType = 'S',
+            Amount = Constants.WithdrawFee,
+            TransactionTimeUtc = DateTime.UtcNow
+        });
 
         await _context.SaveChangesAsync();
 
