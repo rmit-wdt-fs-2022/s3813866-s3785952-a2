@@ -58,4 +58,31 @@ public class CustomerController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+
+    public async Task<IActionResult> Withdraw(int id, decimal amount)
+    {
+        var account = await _context.Account.FindAsync(id);
+
+        if (amount <= 0)
+            ModelState.AddModelError(nameof(amount), "Amount must be positive.");
+        if (amount.TwoDecimalPlacesCheck())
+            ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
+        if (!ModelState.IsValid)
+        {
+            ViewBag.Amount = amount;
+            return View(account);
+        }
+        
+        account.Transactions.Add(
+            new Transaction
+            {
+                TransactionType = 'W',
+                Amount = amount,
+                TransactionTimeUtc = DateTime.UtcNow
+            });
+
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
+    }
 }
