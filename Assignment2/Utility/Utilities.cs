@@ -20,7 +20,7 @@ public static class Utilities
                 case 'T' when t.DestinationAccount == null:
                     amount += t.Amount;
                     break;
-                case 'W':
+                case 'W' or 'S':
                     amount -= t.Amount;
                     break;
                 default:
