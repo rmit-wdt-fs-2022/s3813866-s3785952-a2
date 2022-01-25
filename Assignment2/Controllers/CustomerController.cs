@@ -94,4 +94,7 @@ public class CustomerController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+    
+    public async Task<IActionResult> Transfer(int id) => View(await _context.Account.FindAsync(id));
+    
 }
