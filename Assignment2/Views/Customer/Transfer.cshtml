@@ -11,10 +11,13 @@
         <form asp-action="Transfer">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <h3>Enter target account number: </h3>
                 <label for="AccountNumber" class="control-label"></label>
-                <input id="AccountNumber" name="AccountNumber" class="form-control" value="@ViewBag.AccountNumber?"
-                                       data-val="true" data-val-number="The field Account must be a number."
-                                       data-val-required="The Account field is required."/>
+                <input id="AccountNumber" name="AccountNumber" class="form-control" value="@ViewBag.AccountNumber?.ToString("0.00")"
+                       data-val="true" data-val-number="The field Account must be a number."
+                       data-val-required="The Account field is required."/>
+                <br/>
+                <h3>Enter amount:</h3>
                 <label for="Amount" class="control-label"></label>
                 <input id="Amount" name="Amount" class="form-control" value="@ViewBag.Amount?.ToString("0.00")"
                        data-val="true" data-val-number="The field Amount must be a number."

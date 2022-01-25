@@ -97,4 +97,54 @@ public class CustomerController : Controller
     
     public async Task<IActionResult> Transfer(int id) => View(await _context.Account.FindAsync(id));
     
+    [HttpPost]
+    public async Task<IActionResult> Transfer(int id, decimal amount, int AccountNumber)
+    {
+        var account = await _context.Account.FindAsync(id);
+        
+        if (amount <= 0)
+            ModelState.AddModelError(nameof(amount), "Amount must be positive.");
+        if (amount.TwoDecimalPlacesCheck())
+            ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
+        if (account.Transactions.CalculateAccountBalance() - amount < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
+        {
+            ModelState.AddModelError(nameof(amount), "Not enough funds for Transfer.");
+        }
+        if (account.Transactions.CalculateAccountBalance() - amount < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
+        {
+            ModelState.AddModelError(nameof(amount), "Not enough funds for Transfer.");
+        }
+        if (!ModelState.IsValid)
+        {
+            ViewBag.Amount = amount;
+            ViewBag.AccontNumber = AccountNumber;
+            return View(account);
+        }
+
+        account.Transactions.Add(
+            new Transaction
+            {
+                TransactionType = Constants.Transfer,
+                Amount = amount,
+                DestinationAccountNumber = AccountNumber,
+                TransactionTimeUtc = DateTime.UtcNow
+            });
+        account.Transactions.Add( new Transaction
+        {
+            TransactionType = Constants.Transfer,
+            Amount = Constants.TransferFee,
+            TransactionTimeUtc = DateTime.UtcNow
+        });
+        account.Transactions.Add( new Transaction
+        {
+            TransactionType = Constants.ServiceFee,
+            Amount = Constants.TransferFee,
+            TransactionTimeUtc = DateTime.UtcNow
+        });
+
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
+    }
+    
 }
