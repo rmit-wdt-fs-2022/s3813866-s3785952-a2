@@ -101,7 +101,12 @@ public class CustomerController : Controller
     public async Task<IActionResult> Transfer(int id, decimal amount, int AccountNumber)
     {
         var account = await _context.Account.FindAsync(id);
-        
+        var DestinationAccount = await _context.Account.FindAsync(AccountNumber);
+
+        if (DestinationAccount == null)
+        {
+            ModelState.AddModelError(nameof(AccountNumber), "Account does not exist.");
+        }
         if (amount <= 0)
             ModelState.AddModelError(nameof(amount), "Amount must be positive.");
         if (amount.TwoDecimalPlacesCheck())

@@ -27,6 +27,7 @@
             <div class="form-group">
                 <input type="submit" value="Transfer" class="btn btn-primary" />
             </div>
+            @Html.ValidationMessage("AccountNumber", new { @class = "text-danger" })
         </form>
     </div>
 </div>
