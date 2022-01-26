@@ -62,11 +62,11 @@ public class CustomerController : Controller
             ModelState.AddModelError(nameof(amount), "Amount must be positive.");
         if (amount.TwoDecimalPlacesCheck())
             ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-        if (account.Transactions.CalculateAccountBalance() - amount < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
+        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.WithdrawFee) < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
         {
             ModelState.AddModelError(nameof(amount), "Not enough funds for withdraw.");
         }
-        if (account.Transactions.CalculateAccountBalance() - amount < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
+        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.WithdrawFee) < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
         {
             ModelState.AddModelError(nameof(amount), "Not enough funds for withdraw.");
         }
@@ -111,11 +111,11 @@ public class CustomerController : Controller
             ModelState.AddModelError(nameof(amount), "Amount must be positive.");
         if (amount.TwoDecimalPlacesCheck())
             ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-        if (account.Transactions.CalculateAccountBalance() - amount < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
+        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.TransferFee) < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
         {
             ModelState.AddModelError(nameof(amount), "Not enough funds for Transfer.");
         }
-        if (account.Transactions.CalculateAccountBalance() - amount < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
+        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.TransferFee) < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
         {
             ModelState.AddModelError(nameof(amount), "Not enough funds for Transfer.");
         }
