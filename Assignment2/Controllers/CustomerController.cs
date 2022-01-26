@@ -62,11 +62,11 @@ public class CustomerController : Controller
             ModelState.AddModelError(nameof(amount), "Amount must be positive.");
         if (amount.TwoDecimalPlacesCheck())
             ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-        if (account.Transactions.CalculateAccountBalance() - amount < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
+        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.WithdrawFee) < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
         {
             ModelState.AddModelError(nameof(amount), "Not enough funds for withdraw.");
         }
-        if (account.Transactions.CalculateAccountBalance() - amount < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
+        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.WithdrawFee) < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
         {
             ModelState.AddModelError(nameof(amount), "Not enough funds for withdraw.");
         }
@@ -94,4 +94,63 @@ public class CustomerController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+    
+    public async Task<IActionResult> Transfer(int id) => View(await _context.Account.FindAsync(id));
+    
+    [HttpPost]
+    public async Task<IActionResult> Transfer(int id, decimal amount, int AccountNumber)
+    {
+        var account = await _context.Account.FindAsync(id);
+        var DestinationAccount = await _context.Account.FindAsync(AccountNumber);
+
+        if (DestinationAccount == null)
+        {
+            ModelState.AddModelError(nameof(AccountNumber), "Account does not exist.");
+        }
+        if (amount <= 0)
+            ModelState.AddModelError(nameof(amount), "Amount must be positive.");
+        if (amount.TwoDecimalPlacesCheck())
+            ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
+        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.TransferFee) < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
+        {
+            ModelState.AddModelError(nameof(amount), "Not enough funds for Transfer.");
+        }
+        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.TransferFee) < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
+        {
+            ModelState.AddModelError(nameof(amount), "Not enough funds for Transfer.");
+        }
+        if (!ModelState.IsValid)
+        {
+            ViewBag.Amount = amount;
+            ViewBag.AccontNumber = AccountNumber;
+            return View(account);
+        }
+
+        account.Transactions.Add(
+            new Transaction
+            {
+                TransactionType = Constants.Transfer,
+                Amount = amount,
+                DestinationAccountNumber = AccountNumber,
+                TransactionTimeUtc = DateTime.UtcNow
+            });
+        account.Transactions.Add( new Transaction
+        {
+            TransactionType = Constants.Transfer,
+            Amount = Constants.TransferFee,
+            TransactionTimeUtc = DateTime.UtcNow
+        });
+        account.Transactions.Add( new Transaction
+        {
+            TransactionType = Constants.ServiceFee,
+            Amount = Constants.TransferFee,
+            TransactionTimeUtc = DateTime.UtcNow
+        });
+
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
+    }
+    
+    public async Task<IActionResult> MyTransactions(int id) => View(await _context.Account.FindAsync(id));
 }
