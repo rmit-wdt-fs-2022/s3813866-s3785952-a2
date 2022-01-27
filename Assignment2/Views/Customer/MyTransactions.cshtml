@@ -1,18 +1,39 @@
-﻿@* @model TModel *@
-@* *@
-@* @{ *@
-@*     Layout = null; *@
-@* } *@
-@* *@
-@* <!DOCTYPE html> *@
-@* *@
-@* <html> *@
-@* <head> *@
-@*     <title>title</title> *@
-@* </head> *@
-@* <body> *@
-@* <div> *@
-@*        *@
-@* </div> *@
-@* </body> *@
-@* </html> *@
+﻿@using Assignment2.Utility
+@model Account
+@{
+    ViewData["Title"] = "Account";
+}
+
+<div>
+    <h1 class="display-4">Account Number @Model.AccountNumber (@Model.AccountType)</h1>
+    
+    <h3>Your Transactions</h3>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionId)</th>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionType)</th>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].AccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].DestinationAccount)</th>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].Amount)</th>
+            <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionTimeUtc)</th>
+            
+            <th></th>
+        </tr>
+
+        @{
+            int i = 1;
+        }
+        @foreach(var account in Model.Transactions.OrderByDescending(x => x.TransactionTimeUtc).Skip(i * 4).Take(4)) {
+            <tr>
+                <td>@Html.DisplayFor(x => account.TransactionId)</td>
+                <td>@Html.DisplayFor(x => account.TransactionType)</td>
+                <td>@Html.DisplayFor(x => account.AccountNumber)</td>
+                <td>@Html.DisplayFor(x => account.DestinationAccount)</td>
+                <td>@Html.DisplayFor(x => account.Amount)</td>
+                <td>@Html.DisplayFor(x => account.TransactionTimeUtc)</td>
+            </tr>
+        }
+    </table>
+    <a class="btn btn-primary" @i++ >Next</a>
+    
+</div>
