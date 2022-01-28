@@ -3,6 +3,8 @@ using Assignment2.Filters;
 using Assignment2.Models;
 using Assignment2.Utility;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using X.PagedList;
 
 namespace Assignment2.Controllers;
 
@@ -152,5 +154,28 @@ public class CustomerController : Controller
         return RedirectToAction(nameof(Index));
     }
     
-    public async Task<IActionResult> MyTransactions(int id) => View(await _context.Account.FindAsync(id));
+    // public async Task<IActionResult> MyTransactions(int id) => View(await _context.Account.FindAsync(id));
+    [HttpPost]
+    public async Task<IActionResult> IndexToTransactions(int accountNum)
+    {
+        HttpContext.Session.SetInt32(nameof(Account.AccountNumber), accountNum);
+        return RedirectToAction(nameof(MyTransactions));
+    }
+    
+    public async Task<IActionResult> MyTransactions(int? page = 1)
+    {
+        var accountNum = HttpContext.Session.GetInt32(nameof(Account.AccountNumber));
+        var account = await _context.Account.FindAsync(accountNum);
+        if(account == null)
+            return RedirectToAction(nameof(Index)); // OR return BadRequest();
+        
+        ViewBag.Account = account;
+
+        // Page the orders, maximum of 3 per page.
+        const int pageSize = 4;
+        var pagedList = await _context.Transaction.Where(x => x.AccountNumber == account.AccountNumber).
+            OrderBy(x => x.TransactionId).ToPagedListAsync(page, pageSize);
+
+        return View(pagedList);
+    }
 }

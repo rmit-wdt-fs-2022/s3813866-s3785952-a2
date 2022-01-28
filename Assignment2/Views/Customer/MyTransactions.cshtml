@@ -1,29 +1,30 @@
 ﻿@using Assignment2.Utility
-@model Account
+@using X.PagedList.Web.Common;
+@using X.PagedList.Mvc.Core
+
+@model X.PagedList.IPagedList<Transaction>
 @{
-    ViewData["Title"] = "Account";
+    ViewData["Title"] = "Transactions";
+    var myAccount = (Account) ViewBag.Account;
 }
 
 <div>
-    <h1 class="display-4">Account Number @Model.AccountNumber (@Model.AccountType)</h1>
+    <h1 class="display-4">@myAccount.AccountNumber, your transactions</h1>
     
     <h3>Your Transactions</h3>
     <table class="table">
         <tr>
-            <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionId)</th>
-            <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionType)</th>
-            <th>@Html.DisplayNameFor(x => x.Transactions[0].AccountNumber)</th>
-            <th>@Html.DisplayNameFor(x => x.Transactions[0].DestinationAccount)</th>
-            <th>@Html.DisplayNameFor(x => x.Transactions[0].Amount)</th>
-            <th>@Html.DisplayNameFor(x => x.Transactions[0].TransactionTimeUtc)</th>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionId)</th>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionType)</th>
+            <th>@Html.DisplayNameFor(x => x[0].AccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => x[0].DestinationAccount)</th>
+            <th>@Html.DisplayNameFor(x => x[0].Amount)</th>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionTimeUtc)</th>
             
             <th></th>
         </tr>
-
-        @{
-            int i = 1;
-        }
-        @foreach(var account in Model.Transactions.OrderByDescending(x => x.TransactionTimeUtc).Skip(i * 4).Take(4)) {
+        
+        @foreach(var account in Model) {
             <tr>
                 <td>@Html.DisplayFor(x => account.TransactionId)</td>
                 <td>@Html.DisplayFor(x => account.TransactionType)</td>
@@ -34,6 +35,11 @@
             </tr>
         }
     </table>
-    <a class="btn btn-primary" @i++ >Next</a>
+    @Html.PagedListPager(Model, page => Url.Action("MyTransactions", new { page }),
+            new PagedListRenderOptions {
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" }
+            })
+    
     
 </div>
