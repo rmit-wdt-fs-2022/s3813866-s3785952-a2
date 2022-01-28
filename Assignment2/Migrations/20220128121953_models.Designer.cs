@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment2.Migrations
 {
     [DbContext(typeof(ModelDbContext))]
-    [Migration("20220121095954_model")]
-    partial class model
+    [Migration("20220128121953_models")]
+    partial class models
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -260,8 +260,7 @@ namespace Assignment2.Migrations
                 {
                     b.Navigation("Accounts");
 
-                    b.Navigation("Login")
-                        .IsRequired();
+                    b.Navigation("Login");
                 });
 #pragma warning restore 612, 618
         }
