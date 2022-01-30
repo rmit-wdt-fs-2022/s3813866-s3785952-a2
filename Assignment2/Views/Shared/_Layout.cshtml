@@ -24,7 +24,7 @@
                     }
                     @if (isLoggedIn)
                     {
-                        var fullName = @Context.Session.GetString(nameof(Customer.Name));
+                        var fullName = Context.Session.GetString(nameof(Customer.Name));
 
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
