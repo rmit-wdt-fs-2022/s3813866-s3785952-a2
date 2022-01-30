@@ -29,6 +29,7 @@ public class LoginController : Controller
         // Login customer.
         HttpContext.Session.SetInt32(nameof(Customer.CustomerId), login.CustomerId);
         HttpContext.Session.SetString(nameof(Customer.Name), login.Customer.Name);
+        HttpContext.Session.SetString("loginId", loginID);
 
         return RedirectToAction("Index", "Customer");
     }
