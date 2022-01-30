@@ -17,6 +17,163 @@ body {
   margin-bottom: 60px;
 }
 
+html,body {
+  height: 100%;
+}
+
+body.my-login-page {
+  background-color: #f7f9fb;
+  font-size: 14px;
+}
+
+.my-login-page .brand {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 40px auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,.05);
+  position: relative;
+  z-index: 1;
+}
+
+.my-login-page .brand img {
+  width: 100%;
+}
+
+.my-login-page .card-wrapper {
+  width: 400px;
+}
+
+.my-login-page .card {
+  border-color: transparent;
+  box-shadow: 0 4px 8px rgba(0,0,0,.05);
+}
+
+.my-login-page .card.fat {
+  padding: 10px;
+}
+
+.my-login-page .card .card-title {
+  margin-bottom: 30px;
+}
+
+.my-login-page .form-control {
+  border-width: 2.3px;
+}
+
+.my-login-page .form-group label {
+  width: 100%;
+}
+
+.my-login-page .btn.btn-block {
+  padding: 12px 10px;
+}
+
+.my-login-page .footer {
+  margin: 40px 0;
+  color: #888;
+  text-align: center;
+}
+
+@media screen and (max-width: 425px) {
+  .my-login-page .card-wrapper {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .my-login-page .card.fat {
+    padding: 0;
+  }
+
+  .my-login-page .card.fat .card-body {
+    padding: 15px;
+  }
+}
+
+/* (A) WRAPPER */
+.tabWrap {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 5px 5px 10px -1px rgba(0,0,0,0.28);
+}
+
+/* (B) HEADER TABS */
+.tabHead {
+  display: flex;
+  background: #efefef;
+  padding: 0; margin: 0;
+  list-style: none;
+}
+.tabHead li {
+  padding: 10px 20px;
+  /*flex-grow: 1; flex-basis: 0;*/
+  cursor: pointer;
+}
+.tabHead li.open {
+  color: #fff;
+  background: #2a87d7;
+}
+
+/* (C) CONTENT TABS */
+.tabBody {
+  padding: 20px;
+  
+}
+.tabBody.open { display: block; }
+
+
+/* (X) DOES NOT MATTER */
+/* PAGE & BODY */
+* {
+  font-family: arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* WIDGET */
+.widget-wrap {
+  min-width: 600px;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.center_div{
+  margin: 0 auto;
+  width:80% /* value of your choice which suits your alignment */
+}
+
+
+/* Form */
+.form {
+  padding: 3% !important;
+  background-color: #9fd199;
+  margin-bottom: 5%;
+}
+
+.form-group,
+.form-row {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.form-row {
+  width: 100%;
+  margin: 1px;
+}
+
+.form-inputlabel {
+  display: none;
+}
+
+.form-control {
+  margin-left: 0 !important;
+}
+
 /* (A) WRAPPER */
 .tabWrap {
   max-width: 600px;
