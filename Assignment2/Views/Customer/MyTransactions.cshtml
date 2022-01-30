@@ -19,6 +19,7 @@
             <th>@Html.DisplayNameFor(x => x[0].AccountNumber)</th>
             <th>@Html.DisplayNameFor(x => x[0].DestinationAccount)</th>
             <th>@Html.DisplayNameFor(x => x[0].Amount)</th>
+            <th>@Html.DisplayNameFor(x => x[0].Comment)</th>
             <th>@Html.DisplayNameFor(x => x[0].TransactionTimeUtc)</th>
             
             <th></th>
@@ -31,6 +32,7 @@
                 <td>@Html.DisplayFor(x => account.AccountNumber)</td>
                 <td>@Html.DisplayFor(x => account.DestinationAccountNumber)</td>
                 <td>@Html.DisplayFor(x => account.Amount)</td>
+                <td>@Html.DisplayFor(x => account.Comment)</td>
                 <td>@Html.DisplayFor(x => account.TransactionTimeUtc)</td>
             </tr>
         }

@@ -26,7 +26,7 @@ public class CustomerController : Controller
     public async Task<IActionResult> Deposit(int id) => View(await _context.Account.FindAsync(id));
 
     [HttpPost]
-    public async Task<IActionResult> Deposit(int id, decimal amount)
+    public async Task<IActionResult> Deposit(int id, decimal amount, string? comment)
     {
         var account = await _context.Account.FindAsync(id);
 
@@ -45,8 +45,10 @@ public class CustomerController : Controller
             {
                 TransactionType = Constants.Deposit,
                 Amount = amount,
+                Comment = comment,
                 TransactionTimeUtc = DateTime.UtcNow
             });
+        
 
         await _context.SaveChangesAsync();
 
@@ -100,7 +102,7 @@ public class CustomerController : Controller
     public async Task<IActionResult> Transfer(int id) => View(await _context.Account.FindAsync(id));
     
     [HttpPost]
-    public async Task<IActionResult> Transfer(int id, decimal amount, int AccountNumber)
+    public async Task<IActionResult> Transfer(int id, decimal amount, int AccountNumber, string? comment)
     {
         var account = await _context.Account.FindAsync(id);
         var DestinationAccount = await _context.Account.FindAsync(AccountNumber);
@@ -133,6 +135,7 @@ public class CustomerController : Controller
             {
                 TransactionType = Constants.Transfer,
                 Amount = amount,
+                Comment = comment,
                 DestinationAccountNumber = AccountNumber,
                 TransactionTimeUtc = DateTime.UtcNow
             });
@@ -140,6 +143,7 @@ public class CustomerController : Controller
         {
             TransactionType = Constants.Transfer,
             Amount = amount,
+            Comment = comment,
             TransactionTimeUtc = DateTime.UtcNow
         });
         account.Transactions.Add( new Transaction
