@@ -16,3 +16,54 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* (A) WRAPPER */
+.tabWrap {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 5px 5px 10px -1px rgba(0,0,0,0.28);
+}
+
+/* (B) HEADER TABS */
+.tabHead {
+  display: flex;
+  background: #efefef;
+  padding: 0; margin: 0;
+  list-style: none;
+}
+.tabHead li {
+  padding: 10px 20px;
+  /*flex-grow: 1; flex-basis: 0;*/
+  cursor: pointer;
+}
+.tabHead li.open {
+  color: #fff;
+  background: #2a87d7;
+}
+
+/* (C) CONTENT TABS */
+.tabBody {
+  padding: 20px;
+  
+}
+.tabBody.open { display: block; }
+
+
+/* (X) DOES NOT MATTER */
+/* PAGE & BODY */
+* {
+  font-family: arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* WIDGET */
+.widget-wrap {
+  min-width: 600px;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+
+
