@@ -136,10 +136,10 @@ public class CustomerController : Controller
                 DestinationAccountNumber = AccountNumber,
                 TransactionTimeUtc = DateTime.UtcNow
             });
-        account.Transactions.Add( new Transaction
+        DestinationAccount.Transactions.Add( new Transaction
         {
             TransactionType = Constants.Transfer,
-            Amount = Constants.TransferFee,
+            Amount = amount,
             TransactionTimeUtc = DateTime.UtcNow
         });
         account.Transactions.Add( new Transaction
@@ -174,7 +174,7 @@ public class CustomerController : Controller
         // Page the orders, maximum of 3 per page.
         const int pageSize = 4;
         var pagedList = await _context.Transaction.Where(x => x.AccountNumber == account.AccountNumber).
-            OrderBy(x => x.TransactionId).ToPagedListAsync(page, pageSize);
+            OrderByDescending(x => x.TransactionTimeUtc).ToPagedListAsync(page, pageSize);
 
         return View(pagedList);
     }
