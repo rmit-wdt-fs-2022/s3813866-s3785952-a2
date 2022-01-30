@@ -1,0 +1,107 @@
+﻿@model Customer
+
+@{
+    ViewBag.Title = "Edit User";
+    Layout = "_Layout";
+}
+
+<div class="widget-wrap">
+    <div id="tabs"></div>
+
+    <!-- (B) TABS WRAPPER -->
+    <div id="myTabs">
+        <!-- (B1) HEADERS -->
+        <ul>
+            <li>My Profile</li>
+        </ul>
+
+        <!-- (B2) CONTENTS -->
+        <div>
+            <form method="post" class="needs-validation">
+                <div class="form-group row">
+                    <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="Name" class="form-control" placeholder="First name" required>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="TFN" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="TFN" class="form-control" placeholder="Last name" required>
+                        <span asp-validation-for="TFN" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Address" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="Address" class="form-control" placeholder="Address" required>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="Suburb" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="Suburb" class="form-control" placeholder="Suburb" required>
+                        <span asp-validation-for="Suburb" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="State" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="State" class="form-control" placeholder="State" required>
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="PostCode" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="PostCode" class="form-control" placeholder="PostCode" required>
+                        <span asp-validation-for="PostCode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="Mobile" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <input asp-for="Mobile" class="form-control" placeholder="Mobile" required>
+                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" asp-action="EditAccount" class="btn btn-primary">Update</button>
+                        <a asp-action="Home" class="btn btn-primary">Back</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
