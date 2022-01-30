@@ -87,12 +87,16 @@ public class CustomerController : Controller
                 Amount = amount,
                 TransactionTimeUtc = DateTime.UtcNow
             });
-        account.Transactions.Add( new Transaction
+        if (account.Transactions.MoreThanTwoTransactions())
         {
-            TransactionType = Constants.ServiceFee,
-            Amount = Constants.WithdrawFee,
-            TransactionTimeUtc = DateTime.UtcNow
-        });
+            account.Transactions.Add( new Transaction
+            {
+                TransactionType = Constants.ServiceFee,
+                Amount = Constants.WithdrawFee,
+                TransactionTimeUtc = DateTime.UtcNow
+            });
+        }
+        
 
         await _context.SaveChangesAsync();
 
@@ -146,13 +150,17 @@ public class CustomerController : Controller
             Comment = comment,
             TransactionTimeUtc = DateTime.UtcNow
         });
-        account.Transactions.Add( new Transaction
-        {
-            TransactionType = Constants.ServiceFee,
-            Amount = Constants.TransferFee,
-            TransactionTimeUtc = DateTime.UtcNow
-        });
 
+        if (account.Transactions.MoreThanTwoTransactions())
+        {
+            account.Transactions.Add( new Transaction
+            {
+                TransactionType = Constants.ServiceFee,
+                Amount = Constants.TransferFee,
+                TransactionTimeUtc = DateTime.UtcNow
+            });
+        }
+        
         await _context.SaveChangesAsync();
 
         return RedirectToAction(nameof(Index));
