@@ -1,4 +1,5 @@
 ﻿using Assignment2.Models;
+using Castle.DynamicProxy.Generators.Emitters;
 
 namespace Assignment2.Utility;
 
@@ -32,6 +33,26 @@ public static class Utilities
             // add more for billpay
         }
         return amount;
+    }
+
+    public static bool MoreThanTwoTransactions(this List<Transaction> transactions)
+    {
+        int count = 0;
+
+        foreach (var T in transactions)
+        {
+            if (T.TransactionType == Constants.Transfer || T.TransactionType == Constants.Withdraw)
+            {
+                count++;
+            }
+        }
+        if (count > 2)
+        {
+            return true;
+        }
+        return false;
+        
+        
     }
     
 }
