@@ -4,7 +4,14 @@
   margin-right: auto;
 }
 
+.table_deposit {
 
+  margin-left: auto;
+  margin-right: auto;
+  white-space: nowrap;
+  width: 1%;
+  
+}
 
 html {
   font-size: 14px;
@@ -388,3 +395,16 @@ body {
   }
 }
 
+.heading-welcome {
+  margin : 10px;
+}
+
+.heading-accounts {
+  margin : 20px;
+}
+
+.button-deposit {
+  margin-top: 15px;
+  justify-content: center;
+  display: flex;
+}
