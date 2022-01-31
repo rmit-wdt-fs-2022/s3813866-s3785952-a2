@@ -1,3 +1,11 @@
+/* Table */
+.table-centre {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
 html {
   font-size: 14px;
 }
@@ -215,6 +223,7 @@ body.my-login-page {
 }
 
 /* WIDGET */
+/* WIDGET */
 .widget-wrap {
   min-width: 600px;
   padding: 30px;
@@ -222,10 +231,7 @@ body.my-login-page {
   background: rgba(255, 255, 255, 0.4);
 }
 
-.center_div{
-  margin: 0 auto;
-  width:80% /* value of your choice which suits your alignment */
-}
+
 
 
 /* Form */

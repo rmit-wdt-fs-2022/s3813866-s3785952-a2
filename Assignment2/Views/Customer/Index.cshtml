@@ -4,29 +4,69 @@
     ViewData["Title"] = "Accounts";
 }
 
-<div>
-    <h1 class="display-4">Welcome, @Model.Name</h1>
-    
-    <h3>Your Accounts</h3>
-    <table class="table">
+
+<div class="center_div row align-items-center h-100">
+
+    <div class="d-flex justify-content-center">
+        <h1 class="display-4">Welcome, @Model.Name</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <h3>Your Accounts</h3>
+    </div>
+
+    <table class="table-hover table-centre">
         <tr>
-            <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountNumber)</th>
-            <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountType)</th>
-            <th>Balance</th>
-            <th></th>
+            <th class="text-center">@Html.DisplayNameFor(x => x.Accounts[0].AccountNumber)</th>
+            <th class="text-center">@Html.DisplayNameFor(x => x.Accounts[0].AccountType)</th>
+            <th class="text-center">Balance</th>
+            <th class="text-center">Deposit</th>
+            <th class="text-center">Withdraw</th>
+            <th class="text-center">Transfer</th>
         </tr>
-        @foreach(var account in Model.Accounts) {
+        @foreach (var account in Model.Accounts)
+        {
             <tr>
-                <td>@Html.DisplayFor(x => account.AccountNumber)</td>
-                <td>@Html.DisplayFor(x => account.AccountType)</td>
-                <td>@account.Transactions.CalculateAccountBalance().ToString("C")</td>
-                <td>
+                
+
+
+                <td class="text-center" style="padding:5px 15px 0 15px;">@Html.DisplayFor(x => account.AccountNumber)</td>
+                <td class="text-center" style="padding:5px 15px 0 15px;">
+                    @{
+                        string? accountType = null;
+                        char savings = 'S';
+                        char checking = 'C';
+                        if (account.AccountType.Equals(savings))
+                        {
+                            accountType = "Savings";
+                        }
+                        
+                        else if (account.AccountType.Equals(checking))
+                        {
+                            accountType = "Checking";
+                        }
+                    }
+                    <p>@accountType</p>
+                </td>
+
+
+                <td class="text-center" style="padding:5px 15px 0 15px;">@account.Transactions.CalculateAccountBalance().ToString("C")</td>
+                <td class="text-center" style="padding:5px 15px 0 15px;">
                     <a class="btn btn-primary"
-                       asp-action="Deposit" asp-route-id="@account.AccountNumber">Deposit</a>
+                       asp-action="Deposit" asp-route-id="@account.AccountNumber">
+                        Deposit
+                    </a>
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
                     <a class="btn btn-primary"
-                       asp-action="Withdraw" asp-route-id="@account.AccountNumber">Withdraw</a>
+                       asp-action="Withdraw" asp-route-id="@account.AccountNumber">
+                        Withdraw
+                    </a>
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
                     <a class="btn btn-primary"
-                       asp-action="Transfer" asp-route-id="@account.AccountNumber">Transfer</a>
+                       asp-action="Transfer" asp-route-id="@account.AccountNumber">
+                        Transfer
+                    </a>
                 </td>
             </tr>
         }
