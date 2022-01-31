@@ -3,6 +3,8 @@ using Assignment2.Filters;
 using Assignment2.Models;
 using Assignment2.Utility;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using X.PagedList;
 
 namespace Assignment2.Controllers;
 
@@ -24,7 +26,7 @@ public class CustomerController : Controller
     public async Task<IActionResult> Deposit(int id) => View(await _context.Account.FindAsync(id));
 
     [HttpPost]
-    public async Task<IActionResult> Deposit(int id, decimal amount)
+    public async Task<IActionResult> Deposit(int id, decimal amount, string? comment)
     {
         var account = await _context.Account.FindAsync(id);
 
@@ -43,8 +45,10 @@ public class CustomerController : Controller
             {
                 TransactionType = Constants.Deposit,
                 Amount = amount,
+                Comment = comment,
                 TransactionTimeUtc = DateTime.UtcNow
             });
+        
 
         await _context.SaveChangesAsync();
 
@@ -83,12 +87,16 @@ public class CustomerController : Controller
                 Amount = amount,
                 TransactionTimeUtc = DateTime.UtcNow
             });
-        account.Transactions.Add( new Transaction
+        if (account.Transactions.MoreThanTwoTransactions())
         {
-            TransactionType = Constants.ServiceFee,
-            Amount = Constants.WithdrawFee,
-            TransactionTimeUtc = DateTime.UtcNow
-        });
+            account.Transactions.Add( new Transaction
+            {
+                TransactionType = Constants.ServiceFee,
+                Amount = Constants.WithdrawFee,
+                TransactionTimeUtc = DateTime.UtcNow
+            });
+        }
+        
 
         await _context.SaveChangesAsync();
 
@@ -98,7 +106,7 @@ public class CustomerController : Controller
     public async Task<IActionResult> Transfer(int id) => View(await _context.Account.FindAsync(id));
     
     [HttpPost]
-    public async Task<IActionResult> Transfer(int id, decimal amount, int AccountNumber)
+    public async Task<IActionResult> Transfer(int id, decimal amount, int AccountNumber, string? comment)
     {
         var account = await _context.Account.FindAsync(id);
         var DestinationAccount = await _context.Account.FindAsync(AccountNumber);
@@ -131,26 +139,55 @@ public class CustomerController : Controller
             {
                 TransactionType = Constants.Transfer,
                 Amount = amount,
+                Comment = comment,
                 DestinationAccountNumber = AccountNumber,
                 TransactionTimeUtc = DateTime.UtcNow
             });
-        account.Transactions.Add( new Transaction
+        DestinationAccount.Transactions.Add( new Transaction
         {
             TransactionType = Constants.Transfer,
-            Amount = Constants.TransferFee,
-            TransactionTimeUtc = DateTime.UtcNow
-        });
-        account.Transactions.Add( new Transaction
-        {
-            TransactionType = Constants.ServiceFee,
-            Amount = Constants.TransferFee,
+            Amount = amount,
+            Comment = comment,
             TransactionTimeUtc = DateTime.UtcNow
         });
 
+        if (account.Transactions.MoreThanTwoTransactions())
+        {
+            account.Transactions.Add( new Transaction
+            {
+                TransactionType = Constants.ServiceFee,
+                Amount = Constants.TransferFee,
+                TransactionTimeUtc = DateTime.UtcNow
+            });
+        }
+        
         await _context.SaveChangesAsync();
 
         return RedirectToAction(nameof(Index));
     }
     
-    public async Task<IActionResult> MyTransactions(int id) => View(await _context.Account.FindAsync(id));
+    // public async Task<IActionResult> MyTransactions(int id) => View(await _context.Account.FindAsync(id));
+    [HttpPost]
+    public async Task<IActionResult> IndexToTransactions(int accountNum)
+    {
+        HttpContext.Session.SetInt32(nameof(Account.AccountNumber), accountNum);
+        return RedirectToAction(nameof(MyTransactions));
+    }
+    
+    public async Task<IActionResult> MyTransactions(int? page = 1)
+    {
+        var accountNum = HttpContext.Session.GetInt32(nameof(Account.AccountNumber));
+        var account = await _context.Account.FindAsync(accountNum);
+        if(account == null)
+            return RedirectToAction(nameof(Index)); // OR return BadRequest();
+        
+        ViewBag.Account = account;
+
+        // Page the orders, maximum of 3 per page.
+        const int pageSize = 4;
+        var pagedList = await _context.Transaction.Where(x => x.AccountNumber == account.AccountNumber).
+            OrderByDescending(x => x.TransactionTimeUtc).ToPagedListAsync(page, pageSize);
+
+        return View(pagedList);
+    }
 }

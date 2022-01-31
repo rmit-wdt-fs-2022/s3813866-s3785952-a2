@@ -58,7 +58,15 @@
                        asp-action="Transfer" asp-route-id="@account.AccountNumber">
                         Transfer
                     </a>
+                    @* <a class="btn btn-primary" *@
+                    @*    asp-action="IndexToTransactions" asp-route-id="@account.AccountNumber">My Statements</a> *@
                 </td>
+                <td>
+                    <form asp-action="IndexToTransactions">
+                        <input type="hidden" name="accountNum" value="@account.AccountNumber" />
+                        <input type="submit" class="btn btn-primary" value="My Transactions" />
+                        </form>
+                    </td>
             </tr>
         }
     </table>
