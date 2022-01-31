@@ -3,17 +3,13 @@
 @{
     ViewData["Title"] = "Accounts";
 }
-
-
 <div class="center_div row align-items-center h-100">
-
-    <div class="d-flex justify-content-center">
+    <div class="heading-welcome">
         <h1 class="display-4">Welcome, @Model.Name</h1>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="heading-accounts">
         <h3>Your Accounts</h3>
     </div>
-
     <table class="table-hover table-centre">
         <tr>
             <th class="text-center">@Html.DisplayNameFor(x => x.Accounts[0].AccountNumber)</th>
@@ -26,9 +22,6 @@
         @foreach (var account in Model.Accounts)
         {
             <tr>
-                
-
-
                 <td class="text-center" style="padding:5px 15px 0 15px;">@Html.DisplayFor(x => account.AccountNumber)</td>
                 <td class="text-center" style="padding:5px 15px 0 15px;">
                     @{
@@ -39,7 +32,6 @@
                         {
                             accountType = "Savings";
                         }
-                        
                         else if (account.AccountType.Equals(checking))
                         {
                             accountType = "Checking";
@@ -47,7 +39,6 @@
                     }
                     <p>@accountType</p>
                 </td>
-
 
                 <td class="text-center" style="padding:5px 15px 0 15px;">@account.Transactions.CalculateAccountBalance().ToString("C")</td>
                 <td class="text-center" style="padding:5px 15px 0 15px;">
@@ -72,3 +63,6 @@
         }
     </table>
 </div>
+
+
+
