@@ -1,3 +1,18 @@
+/* Table */
+.table-centre {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table_deposit {
+
+  margin-left: auto;
+  margin-right: auto;
+  white-space: nowrap;
+  width: 1%;
+  
+}
+
 html {
   font-size: 14px;
 }
@@ -215,6 +230,7 @@ body.my-login-page {
 }
 
 /* WIDGET */
+/* WIDGET */
 .widget-wrap {
   min-width: 600px;
   padding: 30px;
@@ -222,10 +238,7 @@ body.my-login-page {
   background: rgba(255, 255, 255, 0.4);
 }
 
-.center_div{
-  margin: 0 auto;
-  width:80% /* value of your choice which suits your alignment */
-}
+
 
 
 /* Form */
@@ -382,3 +395,24 @@ body {
   }
 }
 
+.heading-welcome {
+  margin : 10px;
+}
+
+.heading-accounts {
+  margin : 20px;
+}
+
+.button-deposit-right {
+  margin-top: 10px;
+  justify-content: right;
+}
+
+.button-deposit-left {
+  margin-top: 10px;
+  justify-content: left;
+}
+
+.text-center {
+  text-align: center;
+}
