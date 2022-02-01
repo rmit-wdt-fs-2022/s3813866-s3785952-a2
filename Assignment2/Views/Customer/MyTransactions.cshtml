@@ -1,0 +1,47 @@
+﻿@using Assignment2.Utility
+@using X.PagedList.Web.Common;
+@using X.PagedList.Mvc.Core
+
+@model X.PagedList.IPagedList<Transaction>
+@{
+    ViewData["Title"] = "Transactions";
+    var myAccount = (Account) ViewBag.Account;
+}
+
+<div>
+    <h1 class="display-4">@myAccount.AccountNumber, your transactions</h1>
+    
+    <h3>Your Transactions</h3>
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionId)</th>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionType)</th>
+            <th>@Html.DisplayNameFor(x => x[0].AccountNumber)</th>
+            <th>@Html.DisplayNameFor(x => x[0].DestinationAccount)</th>
+            <th>@Html.DisplayNameFor(x => x[0].Amount)</th>
+            <th>@Html.DisplayNameFor(x => x[0].Comment)</th>
+            <th>@Html.DisplayNameFor(x => x[0].TransactionTimeUtc)</th>
+            
+            <th></th>
+        </tr>
+        
+        @foreach(var account in Model) {
+            <tr>
+                <td>@Html.DisplayFor(x => account.TransactionId)</td>
+                <td>@Html.DisplayFor(x => account.TransactionType)</td>
+                <td>@Html.DisplayFor(x => account.AccountNumber)</td>
+                <td>@Html.DisplayFor(x => account.DestinationAccountNumber)</td>
+                <td>@Html.DisplayFor(x => account.Amount)</td>
+                <td>@Html.DisplayFor(x => account.Comment)</td>
+                <td>@Html.DisplayFor(x => account.TransactionTimeUtc)</td>
+            </tr>
+        }
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("MyTransactions", new { page }),
+        new PagedListRenderOptions {
+            LiElementClasses = new[] { "page-item" },
+            PageClasses = new[] { "page-link" }
+        })
+    
+    
+</div>
