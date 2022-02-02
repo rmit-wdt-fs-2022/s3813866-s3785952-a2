@@ -2,8 +2,8 @@
 using Assignment2.Filters;
 using Assignment2.Models;
 using Assignment2.Utility;
+using Assignment2.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using X.PagedList;
 
 namespace Assignment2.Controllers;
@@ -23,36 +23,54 @@ public class CustomerController : Controller
         return View(customer);
     }
 
-    public async Task<IActionResult> Deposit(int id) => View(await _context.Account.FindAsync(id));
+    public async Task<IActionResult> Deposit(int id)
+    {
+        var Account = await _context.Account.FindAsync(id);
+        var viewModel = new DepositViewModel
+        {
+            CurrentAccount = Account
+        };
+        return View(viewModel);
+    }
 
     [HttpPost]
-    public async Task<IActionResult> Deposit(int id, decimal amount, string? comment)
+    public IActionResult Deposit(DepositViewModel deposit)
     {
-        var account = await _context.Account.FindAsync(id);
-
-        if (amount <= 0)
-            ModelState.AddModelError(nameof(amount), "Amount must be positive.");
-        if (amount.TwoDecimalPlacesCheck())
-            ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
         if (!ModelState.IsValid)
         {
-            ViewBag.Amount = amount;
-            return View(account);
+            return View(deposit);
+        }
+        return View("Confirmation", deposit);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Confirmation(DepositViewModel deposit)
+    {
+
+        if (deposit.Amount <= 0)
+            ModelState.AddModelError(nameof(deposit.Amount), "Amount must be positive.");
+        if (deposit.Amount.TwoDecimalPlacesCheck())
+            ModelState.AddModelError(nameof(deposit.Amount), "Amount cannot have more than 2 decimal places.");
+        if (!ModelState.IsValid)
+        {
+            ViewBag.Amount = deposit.Amount;
+            return View(deposit);
         }
         
-        account.Transactions.Add(
+        deposit.CurrentAccount.Transactions.Add(
             new Transaction
             {
                 TransactionType = Constants.Deposit,
-                Amount = amount,
-                Comment = comment,
+                Amount = deposit.Amount,
+                Comment = deposit.Comment,
                 TransactionTimeUtc = DateTime.UtcNow
             });
         
-
+        
         await _context.SaveChangesAsync();
-
+        
         return RedirectToAction(nameof(Index));
+        
     }
 
     public async Task<IActionResult> Withdraw(int id) => View(await _context.Account.FindAsync(id));
@@ -111,6 +129,7 @@ public class CustomerController : Controller
         var account = await _context.Account.FindAsync(id);
         var DestinationAccount = await _context.Account.FindAsync(AccountNumber);
 
+        
         if (DestinationAccount == null)
         {
             ModelState.AddModelError(nameof(AccountNumber), "Account does not exist.");
@@ -166,7 +185,6 @@ public class CustomerController : Controller
         return RedirectToAction(nameof(Index));
     }
     
-    // public async Task<IActionResult> MyTransactions(int id) => View(await _context.Account.FindAsync(id));
     [HttpPost]
     public async Task<IActionResult> IndexToTransactions(int accountNum)
     {
@@ -179,15 +197,17 @@ public class CustomerController : Controller
         var accountNum = HttpContext.Session.GetInt32(nameof(Account.AccountNumber));
         var account = await _context.Account.FindAsync(accountNum);
         if(account == null)
-            return RedirectToAction(nameof(Index)); // OR return BadRequest();
+            return RedirectToAction(nameof(Index));
         
         ViewBag.Account = account;
 
-        // Page the orders, maximum of 3 per page.
+        // Page the orders, maximum of 4 transaction per page.
         const int pageSize = 4;
         var pagedList = await _context.Transaction.Where(x => x.AccountNumber == account.AccountNumber).
             OrderByDescending(x => x.TransactionTimeUtc).ToPagedListAsync(page, pageSize);
 
         return View(pagedList);
     }
+
+   
 }
