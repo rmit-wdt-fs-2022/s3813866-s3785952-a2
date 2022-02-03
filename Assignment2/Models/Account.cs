@@ -26,4 +26,5 @@ public class Account
     
     [InverseProperty("Account")]
      public virtual List<Transaction> Transactions { get; set; }
+     
 }
