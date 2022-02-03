@@ -3,7 +3,7 @@ using Assignment2.Models;
 
 namespace Assignment2.ViewModels;
 
-public class DepositViewModel
+public class DepositWithdrawViewModel
 {
     
     public Account? CurrentAccount { get; set; }

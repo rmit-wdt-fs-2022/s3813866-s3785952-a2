@@ -26,7 +26,7 @@ public class CustomerController : Controller
     public async Task<IActionResult> Deposit(int id)
     {
         var Account = await _context.Account.FindAsync(id);
-        var viewModel = new DepositViewModel
+        var viewModel = new DepositWithdrawViewModel
         {
             CurrentAccount = Account
         };
@@ -34,12 +34,12 @@ public class CustomerController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Deposit(DepositViewModel deposit)
+    public async Task<IActionResult> Deposit(DepositWithdrawViewModel deposit)
     {
         if (!ModelState.IsValid)
         {
             var Account = await _context.Account.FindAsync(deposit.AccountNum);
-            var viewModel = new DepositViewModel
+            var viewModel = new DepositWithdrawViewModel
             {
                 CurrentAccount = Account
             };
@@ -49,7 +49,7 @@ public class CustomerController : Controller
     }
     
     [HttpPost]
-    public async Task<IActionResult> DepositConfirmation(DepositViewModel deposit)
+    public async Task<IActionResult> DepositConfirmation(DepositWithdrawViewModel deposit)
     {
 
         var Account = await _context.Account.FindAsync(deposit.AccountNum);
@@ -60,7 +60,7 @@ public class CustomerController : Controller
         if (!ModelState.IsValid)
         {
             ViewBag.Amount = deposit.Amount;
-            var viewModel = new DepositViewModel
+            var viewModel = new DepositWithdrawViewModel
             {
                 CurrentAccount = Account
             };
@@ -83,36 +83,63 @@ public class CustomerController : Controller
         
     }
 
-    public async Task<IActionResult> Withdraw(int id) => View(await _context.Account.FindAsync(id));
+    public async Task<IActionResult> Withdraw(int id)
+    {
+        var Account = await _context.Account.FindAsync(id);
+        var viewModel = new DepositWithdrawViewModel
+        {
+            CurrentAccount = Account
+        };
+        return View(viewModel);
+    }
     
     [HttpPost]
-    public async Task<IActionResult> Withdraw(int id, decimal amount)
+    public async Task<IActionResult> Withdraw (DepositWithdrawViewModel deposit)
     {
-        var account = await _context.Account.FindAsync(id);
-
-        if (amount <= 0)
-            ModelState.AddModelError(nameof(amount), "Amount must be positive.");
-        if (amount.TwoDecimalPlacesCheck())
-            ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.WithdrawFee) < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
+        if (!ModelState.IsValid)
         {
-            ModelState.AddModelError(nameof(amount), "Not enough funds for withdraw.");
+            var Account = await _context.Account.FindAsync(deposit.AccountNum);
+            var viewModel = new DepositWithdrawViewModel
+            {
+                CurrentAccount = Account
+            };
+            return View(viewModel);
         }
-        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.WithdrawFee) < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
+        return View("WithdrawConfirmation", deposit);
+    }
+    [HttpPost]
+    public async Task<IActionResult> WithdrawConfirmation(DepositWithdrawViewModel withdraw)
+    {
+        var account = await _context.Account.FindAsync(withdraw.AccountNum);
+
+        if (withdraw.Amount <= 0)
+            ModelState.AddModelError(nameof(withdraw.Amount), "Amount must be positive.");
+        if (withdraw.Amount.TwoDecimalPlacesCheck())
+            ModelState.AddModelError(nameof(withdraw.Amount), "Amount cannot have more than 2 decimal places.");
+        if (account.Transactions.CalculateAccountBalance() - (withdraw.Amount + Constants.WithdrawFee) < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
         {
-            ModelState.AddModelError(nameof(amount), "Not enough funds for withdraw.");
+            ModelState.AddModelError(nameof(withdraw.Amount), "Not enough funds for withdraw.");
+        }
+        if (account.Transactions.CalculateAccountBalance() - (withdraw.Amount + Constants.WithdrawFee) < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
+        {
+            ModelState.AddModelError(nameof(withdraw.Amount), "Not enough funds for withdraw.");
         }
         if (!ModelState.IsValid)
         {
-            ViewBag.Amount = amount;
-            return View(account);
+            ViewBag.Amount = withdraw.Amount;
+            var viewModel = new DepositWithdrawViewModel
+            {
+                CurrentAccount = account
+            };
+            return View(viewModel);
         }
         
         account.Transactions.Add(
             new Transaction
             {
                 TransactionType = Constants.Withdraw,
-                Amount = amount,
+                Amount = withdraw.Amount,
+                Comment = withdraw.Comment,
                 TransactionTimeUtc = DateTime.UtcNow
             });
         if (account.Transactions.MoreThanTwoTransactions())
