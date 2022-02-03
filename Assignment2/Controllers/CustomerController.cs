@@ -157,53 +157,83 @@ public class CustomerController : Controller
 
         return RedirectToAction(nameof(Index));
     }
-    
-    public async Task<IActionResult> Transfer(int id) => View(await _context.Account.FindAsync(id));
+
+    public async Task<IActionResult> Transfer(int id)
+    {
+        var Account = await _context.Account.FindAsync(id);
+        var viewModel = new TransferViewModel
+        {
+            CurrentAccount = Account
+        };
+        return View(viewModel);
+    }
     
     [HttpPost]
-    public async Task<IActionResult> Transfer(int id, decimal amount, int AccountNumber, string? comment)
+    public async Task<IActionResult> Transfer (TransferViewModel transfer)
     {
-        var account = await _context.Account.FindAsync(id);
-        var DestinationAccount = await _context.Account.FindAsync(AccountNumber);
+        var Account = await _context.Account.FindAsync(transfer.AccountNum);
+        var destionationAccount = await _context.Account.FindAsync(transfer.DestinationAccountNum);
+        
+        if (!ModelState.IsValid)
+        {
+            var viewModel = new TransferViewModel
+            {
+                CurrentAccount = Account
+            };
+            return View(viewModel);
+        }
+
+        transfer.DestinationAccount = destionationAccount;
+        return View("TransferConfirmation", transfer);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> TransferConfirmation(TransferViewModel transfer)
+    {
+        var account = await _context.Account.FindAsync(transfer.AccountNum);
+        var DestinationAccount = await _context.Account.FindAsync(transfer.DestinationAccountNum);
 
         
         if (DestinationAccount == null)
         {
-            ModelState.AddModelError(nameof(AccountNumber), "Account does not exist.");
+            ModelState.AddModelError(nameof(transfer.DestinationAccountNum), "Account does not exist.");
         }
-        if (amount <= 0)
-            ModelState.AddModelError(nameof(amount), "Amount must be positive.");
-        if (amount.TwoDecimalPlacesCheck())
-            ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.TransferFee) < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
+        if (transfer.Amount <= 0)
+            ModelState.AddModelError(nameof(transfer.Amount), "Amount must be positive.");
+        if (transfer.Amount.TwoDecimalPlacesCheck())
+            ModelState.AddModelError(nameof(transfer.Amount), "Amount cannot have more than 2 decimal places.");
+        if (account.Transactions.CalculateAccountBalance() - (transfer.Amount + Constants.TransferFee) < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
         {
-            ModelState.AddModelError(nameof(amount), "Not enough funds for Transfer.");
+            ModelState.AddModelError(nameof(transfer.Amount), "Not enough funds for Transfer.");
         }
-        if (account.Transactions.CalculateAccountBalance() - (amount + Constants.TransferFee) < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
+        if (account.Transactions.CalculateAccountBalance() - (transfer.Amount + Constants.TransferFee) < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
         {
-            ModelState.AddModelError(nameof(amount), "Not enough funds for Transfer.");
+            ModelState.AddModelError(nameof(transfer.Amount), "Not enough funds for Transfer.");
         }
         if (!ModelState.IsValid)
         {
-            ViewBag.Amount = amount;
-            ViewBag.AccontNumber = AccountNumber;
-            return View(account);
+            ViewBag.Amount = transfer.Amount;
+            var viewModel = new TransferViewModel
+            {
+                CurrentAccount = account
+            };
+            return View(viewModel);
         }
 
         account.Transactions.Add(
             new Transaction
             {
                 TransactionType = Constants.Transfer,
-                Amount = amount,
-                Comment = comment,
-                DestinationAccountNumber = AccountNumber,
+                Amount = transfer.Amount,
+                Comment = transfer.Comment,
+                DestinationAccountNumber = transfer.DestinationAccountNum,
                 TransactionTimeUtc = DateTime.UtcNow
             });
         DestinationAccount.Transactions.Add( new Transaction
         {
             TransactionType = Constants.Transfer,
-            Amount = amount,
-            Comment = comment,
+            Amount = transfer.Amount,
+            Comment = transfer.Comment,
             TransactionTimeUtc = DateTime.UtcNow
         });
 
