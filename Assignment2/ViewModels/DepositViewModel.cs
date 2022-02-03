@@ -6,7 +6,7 @@ namespace Assignment2.ViewModels;
 public class DepositViewModel
 {
     
-    public Account CurrentAccount { get; set; }
+    public Account? CurrentAccount { get; set; }
     
     [Required]
     public int AccountNum { get; set; }

@@ -34,19 +34,25 @@ public class CustomerController : Controller
     }
 
     [HttpPost]
-    public IActionResult Deposit(DepositViewModel deposit)
+    public async Task<IActionResult> Deposit(DepositViewModel deposit)
     {
         if (!ModelState.IsValid)
         {
-            return View(deposit);
+            var Account = await _context.Account.FindAsync(deposit.AccountNum);
+            var viewModel = new DepositViewModel
+            {
+                CurrentAccount = Account
+            };
+            return View(viewModel);
         }
-        return View("Confirmation", deposit);
+        return View("DepositConfirmation", deposit);
     }
     
     [HttpPost]
-    public async Task<IActionResult> Confirmation(DepositViewModel deposit)
+    public async Task<IActionResult> DepositConfirmation(DepositViewModel deposit)
     {
 
+        var Account = await _context.Account.FindAsync(deposit.AccountNum);
         if (deposit.Amount <= 0)
             ModelState.AddModelError(nameof(deposit.Amount), "Amount must be positive.");
         if (deposit.Amount.TwoDecimalPlacesCheck())
@@ -54,10 +60,14 @@ public class CustomerController : Controller
         if (!ModelState.IsValid)
         {
             ViewBag.Amount = deposit.Amount;
-            return View(deposit);
+            var viewModel = new DepositViewModel
+            {
+                CurrentAccount = Account
+            };
+            return View(viewModel);
         }
         
-        deposit.CurrentAccount.Transactions.Add(
+        Account.Transactions.Add(
             new Transaction
             {
                 TransactionType = Constants.Deposit,

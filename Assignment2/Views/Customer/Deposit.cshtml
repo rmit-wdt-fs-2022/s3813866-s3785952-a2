@@ -72,7 +72,6 @@
                                     <input asp-for="Comment" class="form-control" value="@ViewBag.Comment" placeholder="Add A Comment"/>
                                     @Html.ValidationMessage("Comment", new {@class = "text-danger"})
                                     <br/>
-                                    <input  type ="hidden" asp-for="CurrentAccount" value="@Model.CurrentAccount"/>
                                     <input  type ="hidden" asp-for="AccountNum" value="@Model.CurrentAccount.AccountNumber"/>
                                 </div>
                             </div>
