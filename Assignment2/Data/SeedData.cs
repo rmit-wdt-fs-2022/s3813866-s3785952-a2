@@ -1,5 +1,6 @@
 ﻿using Assignment2.DTO;
 using Assignment2.Models;
+using Assignment2.Utility;
 using Newtonsoft.Json;
 
 namespace Assignment2.Data;
@@ -57,7 +58,8 @@ public class SeedData
             }
         });
 
-        foreach (var customer in customers)
+        var enumerable = customers as Customer[] ?? customers.ToArray();
+        foreach (var customer in enumerable)
         {
             context.Customer.Add(customer);
             context.Login.Add(customer.Login);
@@ -69,9 +71,25 @@ public class SeedData
                     context.Transaction.Add(transaction);
                 }
             }
-        
         }
 
+        foreach (var c in enumerable)
+        {
+            var payee = new Payee
+            {
+                Name = Utilities.RandomCompanyName(), 
+                Address = Utilities.RandomAddress(), 
+                Suburb = Utilities.RandomSuburb(),
+                State = "VIC",
+                Postcode = Utilities.RandomPostcode(), 
+                Phone = Utilities.RandomPhone()
+            };
+        
+            context.Payee.Add(payee);
+        }
+
+        
+        
         context.SaveChanges();
         //seed other tables I.E BillPay and Payee
 

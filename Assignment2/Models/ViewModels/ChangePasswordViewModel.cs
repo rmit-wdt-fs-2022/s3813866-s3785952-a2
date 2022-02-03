@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Assignment2.Models;
-using Newtonsoft.Json.Serialization;
 
-namespace Assignment2.ViewModels;
+namespace Assignment2.Models.ViewModels;
 
 public class ChangePasswordViewModel
 {
