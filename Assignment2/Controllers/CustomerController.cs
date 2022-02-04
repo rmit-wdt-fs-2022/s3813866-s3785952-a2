@@ -1,8 +1,8 @@
 ﻿using Assignment2.Data;
 using Assignment2.Filters;
 using Assignment2.Models;
+using Assignment2.Models.ViewModels;
 using Assignment2.Utility;
-using Assignment2.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
 
@@ -181,7 +181,6 @@ public class CustomerController : Controller
         {
             ModelState.AddModelError(nameof(transfer.Amount), "Account does not exist.");
         }
-        // if (Convert.ToInt32(transfer.DestinationAccountNum))
         
         if (transfer.Amount <= 0)
             ModelState.AddModelError(nameof(transfer.Amount), "Amount must be positive.");

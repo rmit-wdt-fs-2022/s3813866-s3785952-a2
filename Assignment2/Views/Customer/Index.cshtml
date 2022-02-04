@@ -18,6 +18,8 @@
             <th class="text-center">Deposit</th>
             <th class="text-center">Withdraw</th>
             <th class="text-center">Transfer</th>
+            <th class="text-center">Transactions</th>
+            <th class="text-center">Bill Pay</th>
         </tr>
         @foreach (var account in Model.Accounts)
         {
@@ -58,15 +60,19 @@
                        asp-action="Transfer" asp-route-id="@account.AccountNumber">
                         Transfer
                     </a>
-                    @* <a class="btn btn-primary" *@
-                    @*    asp-action="IndexToTransactions" asp-route-id="@account.AccountNumber">My Statements</a> *@
                 </td>
                 <td>
                     <form asp-action="IndexToTransactions">
                         <input type="hidden" name="accountNum" value="@account.AccountNumber" />
                         <input type="submit" class="btn btn-primary" value="My Transactions" />
-                        </form>
-                    </td>
+                    </form>
+                </td>
+                                <td class="text-center" style="padding:0 15px 0 15px;">
+                                    <a class="btn btn-primary"
+                                       asp-controller="BillPay" asp-action="Index" asp-route-id="@account.AccountNumber">
+                                        BillPay
+                                    </a>
+                                </td>
             </tr>
         }
     </table>

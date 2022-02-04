@@ -4,7 +4,7 @@ public static class Constants
 {
     //Fees for different transaction types
     public const decimal WithdrawFee = (decimal) 0.05;
-    public const decimal TransferFee = (decimal) 0.05;
+    public const decimal TransferFee = (decimal) 0.1;
     
     //Account minimum balances
     public const int SavingMinimumBalance = 0;
