@@ -11,14 +11,14 @@ public class SeedData
         
         var context = serviceProvider.GetRequiredService<ModelDbContext>();
     
-        // Look for any movies.
+        
         Console.WriteLine("here");
         if(context.Customer.Any())
             return; // DB has already been seeded.
         Console.WriteLine("here1");
         const string Url = "https://coreteaching01.csit.rmit.edu.au/~e103884/wdt/services/customers/";
     
-        // Contact webservice.
+        
         using var client = new HttpClient();
         var json = client.GetStringAsync(Url).Result;
         // Convert JSON into objects.
@@ -28,6 +28,7 @@ public class SeedData
         });
 
 
+        //using DTOs to seed into DB
         var customers = customersDTO.Select(customersDTOs => new Customer
         {
             CustomerId = customersDTOs.CustomerId,
