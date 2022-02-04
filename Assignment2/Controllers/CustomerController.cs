@@ -36,6 +36,11 @@ public class CustomerController : Controller
     [HttpPost]
     public async Task<IActionResult> Deposit(DepositWithdrawViewModel deposit)
     {
+        if (deposit.Amount <= 0)
+            ModelState.AddModelError(nameof(deposit.Amount), "Amount must be positive.");
+        if (deposit.Amount.TwoDecimalPlacesCheck())
+            ModelState.AddModelError(nameof(deposit.Amount), "Amount cannot have more than 2 decimal places.");
+        
         if (!ModelState.IsValid)
         {
             var Account = await _context.Account.FindAsync(deposit.AccountNum);
@@ -53,10 +58,6 @@ public class CustomerController : Controller
     {
 
         var Account = await _context.Account.FindAsync(deposit.AccountNum);
-        if (deposit.Amount <= 0)
-            ModelState.AddModelError(nameof(deposit.Amount), "Amount must be positive.");
-        if (deposit.Amount.TwoDecimalPlacesCheck())
-            ModelState.AddModelError(nameof(deposit.Amount), "Amount cannot have more than 2 decimal places.");
         if (!ModelState.IsValid)
         {
             ViewBag.Amount = deposit.Amount;
@@ -94,36 +95,38 @@ public class CustomerController : Controller
     }
     
     [HttpPost]
-    public async Task<IActionResult> Withdraw (DepositWithdrawViewModel deposit)
+    public async Task<IActionResult> Withdraw (DepositWithdrawViewModel withdraw)
     {
+        var Account = await _context.Account.FindAsync(withdraw.AccountNum);
+        if (withdraw.Amount <= 0)
+            ModelState.AddModelError(nameof(withdraw.Amount), "Amount must be positive.");
+        if (withdraw.Amount.TwoDecimalPlacesCheck())
+            ModelState.AddModelError(nameof(withdraw.Amount), "Amount cannot have more than 2 decimal places.");
+        if (Account.Transactions.CalculateAccountBalance() - (withdraw.Amount + Constants.WithdrawFee) < Constants.SavingMinimumBalance && Account.AccountType == Constants.SavingAccType)
+        {
+            ModelState.AddModelError(nameof(withdraw.Amount), "Not enough funds for withdraw.");
+        }
+        if (Account.Transactions.CalculateAccountBalance() - (withdraw.Amount + Constants.WithdrawFee) < Constants.CheckingMinimumBalance && Account.AccountType == Constants.CheckingAccType)
+        {
+            ModelState.AddModelError(nameof(withdraw.Amount), "Not enough funds for withdraw.");
+        }
         if (!ModelState.IsValid)
         {
-            var Account = await _context.Account.FindAsync(deposit.AccountNum);
+            
             var viewModel = new DepositWithdrawViewModel
             {
                 CurrentAccount = Account
             };
             return View(viewModel);
         }
-        return View("WithdrawConfirmation", deposit);
+        return View("WithdrawConfirmation", withdraw);
     }
     [HttpPost]
     public async Task<IActionResult> WithdrawConfirmation(DepositWithdrawViewModel withdraw)
     {
         var account = await _context.Account.FindAsync(withdraw.AccountNum);
 
-        if (withdraw.Amount <= 0)
-            ModelState.AddModelError(nameof(withdraw.Amount), "Amount must be positive.");
-        if (withdraw.Amount.TwoDecimalPlacesCheck())
-            ModelState.AddModelError(nameof(withdraw.Amount), "Amount cannot have more than 2 decimal places.");
-        if (account.Transactions.CalculateAccountBalance() - (withdraw.Amount + Constants.WithdrawFee) < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
-        {
-            ModelState.AddModelError(nameof(withdraw.Amount), "Not enough funds for withdraw.");
-        }
-        if (account.Transactions.CalculateAccountBalance() - (withdraw.Amount + Constants.WithdrawFee) < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
-        {
-            ModelState.AddModelError(nameof(withdraw.Amount), "Not enough funds for withdraw.");
-        }
+        
         if (!ModelState.IsValid)
         {
             ViewBag.Amount = withdraw.Amount;
@@ -174,6 +177,23 @@ public class CustomerController : Controller
         var Account = await _context.Account.FindAsync(transfer.AccountNum);
         var destionationAccount = await _context.Account.FindAsync(transfer.DestinationAccountNum);
         
+        if (destionationAccount == null)
+        {
+            ModelState.AddModelError(nameof(transfer.Amount), "Account does not exist.");
+        }
+        if (transfer.Amount <= 0)
+            ModelState.AddModelError(nameof(transfer.Amount), "Amount must be positive.");
+        if (transfer.Amount.TwoDecimalPlacesCheck())
+            ModelState.AddModelError(nameof(transfer.Amount), "Amount cannot have more than 2 decimal places.");
+        if (Account.Transactions.CalculateAccountBalance() - (transfer.Amount + Constants.TransferFee) < Constants.SavingMinimumBalance && Account.AccountType == Constants.SavingAccType)
+        {
+            ModelState.AddModelError(nameof(transfer.Amount), "Not enough funds for Transfer.");
+        }
+        if (Account.Transactions.CalculateAccountBalance() - (transfer.Amount + Constants.TransferFee) < Constants.CheckingMinimumBalance && Account.AccountType == Constants.CheckingAccType)
+        {
+            ModelState.AddModelError(nameof(transfer.Amount), "Not enough funds for Transfer.");
+        }
+        
         if (!ModelState.IsValid)
         {
             var viewModel = new TransferViewModel
@@ -192,33 +212,7 @@ public class CustomerController : Controller
     {
         var account = await _context.Account.FindAsync(transfer.AccountNum);
         var DestinationAccount = await _context.Account.FindAsync(transfer.DestinationAccountNum);
-
         
-        if (DestinationAccount == null)
-        {
-            ModelState.AddModelError(nameof(transfer.DestinationAccountNum), "Account does not exist.");
-        }
-        if (transfer.Amount <= 0)
-            ModelState.AddModelError(nameof(transfer.Amount), "Amount must be positive.");
-        if (transfer.Amount.TwoDecimalPlacesCheck())
-            ModelState.AddModelError(nameof(transfer.Amount), "Amount cannot have more than 2 decimal places.");
-        if (account.Transactions.CalculateAccountBalance() - (transfer.Amount + Constants.TransferFee) < Constants.SavingMinimumBalance && account.AccountType == Constants.SavingAccType)
-        {
-            ModelState.AddModelError(nameof(transfer.Amount), "Not enough funds for Transfer.");
-        }
-        if (account.Transactions.CalculateAccountBalance() - (transfer.Amount + Constants.TransferFee) < Constants.CheckingMinimumBalance && account.AccountType == Constants.CheckingAccType)
-        {
-            ModelState.AddModelError(nameof(transfer.Amount), "Not enough funds for Transfer.");
-        }
-        if (!ModelState.IsValid)
-        {
-            ViewBag.Amount = transfer.Amount;
-            var viewModel = new TransferViewModel
-            {
-                CurrentAccount = account
-            };
-            return View(viewModel);
-        }
 
         account.Transactions.Add(
             new Transaction
