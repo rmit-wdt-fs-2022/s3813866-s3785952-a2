@@ -53,43 +53,8 @@ public static class Utilities
             return true;
         }
         return false;
+        
+        
     }
     
-    // Used from stack overflow
-    // https://stackoverflow.com/questions/33749543/unique-4-digit-random-number-in-c-sharp/33749610
-    public static int GenerateRandomId()
-    {
-        int _min = 1000;
-        int _max = 9999;
-        Random _rdm = new Random();
-        return _rdm.Next(_min, _max);
-    }     
-    
-
-    public static string RandomCompanyName()
-    {
-        string[] companies = {"BHP Group", "Rio Tinto", "Commonwealth Bank", "CSL", "Westpac", "NAB", "ANZ", "Fortescue", "Wesfarmers", "Macquarie Group", "Woolworths", "Santos", "Telstra", "Transurban", "APA Group"};
-        return companies[Faker.RandomNumber.Next(0,companies.Length)];
-    }
-
-    public static string RandomAddress()
-    {
-        return Faker.RandomNumber.Next(0,1000) + " " +Faker.Address.StreetName();
-    }
-    
-    public static string RandomSuburb()
-    {
-        return Faker.Address.StreetName();
-    }
-
-
-    public static string RandomPostcode()
-    {
-        return Faker.RandomNumber.Next(0,5000).ToString();
-    }
-    
-    public static string RandomPhone()
-    {
-        return "04" + Faker.RandomNumber.Next(0,10000000);
-    }
 }
