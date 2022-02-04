@@ -1,0 +1,89 @@
+﻿@model Assignment2.Models.ViewModels.BillPayTableViewModel
+
+@{
+    ViewBag.Title = "Payees";
+    Layout = "_Layout";
+}
+
+<div class="center_div row align-items-center h-100">
+    <div class="heading-accounts">
+        <h3>Payees</h3>
+    </div>
+    
+    <table class="table table-hover table-centre">
+        <tr>
+            <th class="text-center">Payee ID</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Address</th>
+            <th class="text-center">Suburb</th>
+            <th class="text-center">State</th>
+            <th class="text-center">Post Code</th>
+            <th class="text-center">Phone</th>
+        </tr>
+        @foreach (var payee in Model.Payees)
+        {
+            <tr>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.PayeeId
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.Name
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.Address
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.Suburb
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.State
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.Postcode
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.Phone
+                </td>
+            </tr>
+        }
+    </table>
+    
+    
+    <h3>Scheduled Bill Pay</h3>
+    <table class="table table-hover table-centre">
+            <tr>
+                <th class="text-center">Bill Pay ID</th>
+                <th class="text-center">Account Number</th>
+                <th class="text-center">Payee Id</th>
+                <th class="text-center">amount</th>
+                <th class="text-center">Scheduled Time Of Payment</th>
+                <th class="text-center">Period</th>
+            </tr>
+            @foreach (var payee in Model.BillPays)
+            {
+                <tr>
+                    <td class="text-center" style="padding:0 15px 0 15px;">
+                        @payee.BillPayId
+                    </td>
+                    <td class="text-center" style="padding:0 15px 0 15px;">
+                        @payee.AccountNumber
+                    </td>
+                    <td class="text-center" style="padding:0 15px 0 15px;">
+                        @payee.PayeeId
+                    </td>
+                    <td class="text-center" style="padding:0 15px 0 15px;">
+                        @payee.Amount.ToString("C")
+                    </td>
+                    <td class="text-center" style="padding:0 15px 0 15px;">
+                        @payee.ScheduleTimeUtc.ToLocalTime()
+                    </td>
+                    <td class="text-center" style="padding:0 15px 0 15px;">
+                        @payee.Period
+                    </td>
+                </tr>
+            }
+        </table>
+    
+    
+    
+</div>

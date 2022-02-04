@@ -3,7 +3,6 @@ using Assignment2.Filters;
 using Assignment2.Models;
 using Assignment2.Utility;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using X.PagedList;
 
 namespace Assignment2.Controllers;
