@@ -11,24 +11,27 @@ public class BillPayController : Controller
     public BillPayController(ModelDbContext context) => _context = context;
     
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int id)
     {
         var payee = _context.Payee.ToList();
         var billpay = _context.BillPay.ToList();
-
-        var viewModel = new BillPayTableViewModel
+            
+        var viewModel = new BillPayViewModel
         {
+            SelectedAccountNumber = id,
             Payees = payee,
             BillPays = billpay
         };
         return View(viewModel);
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+    public async Task<IActionResult> CreateBillPay(BillPayViewModel viewModel)
+    {
+        
+        
+
+        return View();
+
+    }
 }

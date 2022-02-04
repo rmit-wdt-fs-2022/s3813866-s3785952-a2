@@ -4,10 +4,53 @@
     ViewBag.Title = "Create Bill Pay";
     Layout = "_Layout";
 }
+<h1>Create Bill Pay</h1>
+
+<form asp-action="CreateBillPay">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+
+                <label asp-for="PayeeId" class="control-label">Enter PayeeId</label>
+                <input asp-for="PayeeId" class="form-control" placeholder="Enter PayeeId To Pay"/>
+
+                <label asp-for="Amount" class="control-label">Enter An Amount To Send</label>
+                <input asp-for="Amount" class="form-control" placeholder="Enter An Amount To Send"/>
+
+                <label asp-for="ScheduleTimeUtc" class="control-label">Enter A Date To Be Paid</label>
+                <input asp-for="ScheduleTimeUtc" class="form-control" placeholder="Enter A Date To Be Paid"/>
+
+                <label asp-for="Amount" class="control-label"> Enter An Amount To Send</label>
+                <input asp-for="Amount" class="form-control" placeholder="Enter Amount To Send"/>
+
+                <select id="Period" multiple="multiple" name="Period">
+                    <option>Please select one</option>
+                    <option value="1">One Off</option>
+                    <option value="2">Monthly </option>
+                </select>
+                <input asp-for="SelectedAccountNumber" value="@Model.SelectedAccountNumber"/>
 
 
+            </div>
+        </div>
+    </div>
 
-
-
-
-
+    <div class="row">
+        <div class="col-md-6 button-deposit-right">
+            <div class=" col-md-6">
+                <div class="form-group">
+                    <input type="submit" value="Deposit" class="btn btn-primary"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 button-deposit-left">
+            <div class=" col-md-6">
+                <div class="form-group">
+                    <a asp-action="Index" class="btn btn-block btn-danger">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,4 +1,4 @@
-﻿@model Assignment2.Models.ViewModels.BillPayTableViewModel
+﻿@model Assignment2.Models.ViewModels.BillPayViewModel
 
 @{
     ViewBag.Title = "Payees";
@@ -9,7 +9,7 @@
     <div class="heading-accounts">
         <h3>Payees</h3>
     </div>
-    
+
     <table class="table table-hover table-centre">
         <tr>
             <th class="text-center">Payee ID</th>
@@ -47,43 +47,49 @@
             </tr>
         }
     </table>
-    
-    
+
+
     <h3>Scheduled Bill Pay</h3>
     <table class="table table-hover table-centre">
+        <tr>
+            <th class="text-center">Bill Pay ID</th>
+            <th class="text-center">Account Number</th>
+            <th class="text-center">Payee Id</th>
+            <th class="text-center">amount</th>
+            <th class="text-center">Scheduled Time Of Payment</th>
+            <th class="text-center">Period</th>
+        </tr>
+        @foreach (var payee in Model.BillPays)
+        {
             <tr>
-                <th class="text-center">Bill Pay ID</th>
-                <th class="text-center">Account Number</th>
-                <th class="text-center">Payee Id</th>
-                <th class="text-center">amount</th>
-                <th class="text-center">Scheduled Time Of Payment</th>
-                <th class="text-center">Period</th>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.BillPayId
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.AccountNumber
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.PayeeId
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.Amount.ToString("C")
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.ScheduleTimeUtc.ToLocalTime()
+                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    @payee.Period
+                </td>
             </tr>
-            @foreach (var payee in Model.BillPays)
-            {
-                <tr>
-                    <td class="text-center" style="padding:0 15px 0 15px;">
-                        @payee.BillPayId
-                    </td>
-                    <td class="text-center" style="padding:0 15px 0 15px;">
-                        @payee.AccountNumber
-                    </td>
-                    <td class="text-center" style="padding:0 15px 0 15px;">
-                        @payee.PayeeId
-                    </td>
-                    <td class="text-center" style="padding:0 15px 0 15px;">
-                        @payee.Amount.ToString("C")
-                    </td>
-                    <td class="text-center" style="padding:0 15px 0 15px;">
-                        @payee.ScheduleTimeUtc.ToLocalTime()
-                    </td>
-                    <td class="text-center" style="padding:0 15px 0 15px;">
-                        @payee.Period
-                    </td>
-                </tr>
-            }
-        </table>
-    
-    
-    
+        }
+    </table>
+
+    <td class="text-center" style="padding:0 15px 0 15px;">
+        <a class="btn btn-primary"
+           asp-controller="BillPay" asp-action="CreateBillPay" asp-route-id="@Model.SelectedAccountNumber">
+            BillPay
+        </a>
+    </td>
+
+
 </div>

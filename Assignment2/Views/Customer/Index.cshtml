@@ -63,20 +63,17 @@
                 </td>
                 <td>
                     <form asp-action="IndexToTransactions">
-                        <input type="hidden" name="accountNum" value="@account.AccountNumber" />
-                        <input type="submit" class="btn btn-primary" value="My Transactions" />
+                        <input type="hidden" name="accountNum" value="@account.AccountNumber"/>
+                        <input type="submit" class="btn btn-primary" value="My Transactions"/>
                     </form>
                 </td>
-                                <td class="text-center" style="padding:0 15px 0 15px;">
-                                    <a class="btn btn-primary"
-                                       asp-controller="BillPay" asp-action="Index" asp-route-id="@account.AccountNumber">
-                                        BillPay
-                                    </a>
-                                </td>
+                <td class="text-center" style="padding:0 15px 0 15px;">
+                    <a class="btn btn-primary"
+                       asp-controller="BillPay" asp-action="Index" asp-route-id="@account.AccountNumber">
+                        BillPay
+                    </a>
+                </td>
             </tr>
         }
     </table>
 </div>
-
-
-
