@@ -28,8 +28,8 @@
                 <td class="text-center" style="padding:5px 15px 0 15px;">
                     @{
                         string? accountType = null;
-                        char savings = 'S';
-                        char checking = 'C';
+                        var savings = 'S';
+                        var checking = 'C';
                         if (account.AccountType.Equals(savings))
                         {
                             accountType = "Savings";

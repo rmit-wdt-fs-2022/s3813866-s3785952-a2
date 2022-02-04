@@ -84,11 +84,16 @@
         }
     </table>
 
+
     <td class="text-center" style="padding:0 15px 0 15px;">
-        <a class="btn btn-primary"
-           asp-controller="BillPay" asp-action="CreateBillPay" asp-route-id="@Model.SelectedAccountNumber">
-            BillPay
-        </a>
+        <form asp-action="CreateBillPay">
+            <div class="form-group">
+                @Html.HiddenFor(x => x.SelectedAccountNumber)
+                <input type="submit" value="Confirm" class="ml-5 btn btn-primary"/>
+                <br/>
+                <a asp-action="Index">Bill Pay</a>
+            </div>
+        </form>
     </td>
 
 

@@ -12,19 +12,17 @@
             <div class="form-group">
 
                 <label asp-for="PayeeId" class="control-label">Enter PayeeId</label>
-                <input asp-for="PayeeId" class="form-control" placeholder="Enter PayeeId To Pay"/>
+                <input asp-for="PayeeId" class="form-control" value="@ViewBag.PayeeId" placeholder="Enter PayeeId To Pay"/>
 
                 <label asp-for="Amount" class="control-label">Enter An Amount To Send</label>
-                <input asp-for="Amount" class="form-control" placeholder="Enter An Amount To Send"/>
+                <input asp-for="Amount" class="form-control" value="@ViewBag.Amount" placeholder="Enter An Amount To Send"/>
 
                 <label asp-for="ScheduleTimeUtc" class="control-label">Enter A Date To Be Paid</label>
-                <input asp-for="ScheduleTimeUtc" class="form-control" placeholder="Enter A Date To Be Paid"/>
+                <input asp-for="ScheduleTimeUtc" class="form-control" value="@ViewBag.ScheduleTimeUtc" placeholder="Enter A Date To Be Paid"/>
 
-                <label asp-for="Amount" class="control-label"> Enter An Amount To Send</label>
-                <input asp-for="Amount" class="form-control" placeholder="Enter Amount To Send"/>
-
-                <select id="Period" multiple="multiple" name="Period">
-                    <option>Please select one</option>
+                <label asp-for="Period" class="control-label"> Enter An Period To Be Paid</label>
+                <select id="Period" name="Period">
+                    <option disabled>Please select one</option>
                     <option value="1">One Off</option>
                     <option value="2">Monthly </option>
                 </select>

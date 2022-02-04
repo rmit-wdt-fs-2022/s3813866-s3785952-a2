@@ -7,15 +7,18 @@ namespace Assignment2.Controllers;
 public class BillPayController : Controller
 {
     private readonly ModelDbContext _context;
-    
-    public BillPayController(ModelDbContext context) => _context = context;
-    
+
+    public BillPayController(ModelDbContext context)
+    {
+        _context = context;
+    }
+
     [HttpGet]
     public async Task<IActionResult> Index(int id)
     {
         var payee = _context.Payee.ToList();
         var billpay = _context.BillPay.ToList();
-            
+
         var viewModel = new BillPayViewModel
         {
             SelectedAccountNumber = id,
@@ -28,10 +31,6 @@ public class BillPayController : Controller
 
     public async Task<IActionResult> CreateBillPay(BillPayViewModel viewModel)
     {
-        
-        
-
-        return View();
-
+        return View(viewModel);
     }
 }

@@ -9,16 +9,15 @@ public class SeedData
 {
     public static void SaveCustomerInDb(IServiceProvider serviceProvider)
     {
-        
         var context = serviceProvider.GetRequiredService<ModelDbContext>();
-    
+
         // Look for any movies.
         Console.WriteLine("here");
-        if(context.Customer.Any())
+        if (context.Customer.Any())
             return; // DB has already been seeded.
         Console.WriteLine("here1");
         const string Url = "https://coreteaching01.csit.rmit.edu.au/~e103884/wdt/services/customers/";
-    
+
         // Contact webservice.
         using var client = new HttpClient();
         var json = client.GetStringAsync(Url).Result;
@@ -66,10 +65,7 @@ public class SeedData
             foreach (var account in customer.Accounts)
             {
                 context.Account.Add(account);
-                foreach (var transaction in account.Transactions)
-                {
-                    context.Transaction.Add(transaction);
-                }
+                foreach (var transaction in account.Transactions) context.Transaction.Add(transaction);
             }
         }
 
@@ -77,21 +73,19 @@ public class SeedData
         {
             var payee = new Payee
             {
-                Name = Utilities.RandomCompanyName(), 
-                Address = Utilities.RandomAddress(), 
+                Name = Utilities.RandomCompanyName(),
+                Address = Utilities.RandomAddress(),
                 Suburb = Utilities.RandomSuburb(),
                 State = "VIC",
-                Postcode = Utilities.RandomPostcode(), 
+                Postcode = Utilities.RandomPostcode(),
                 Phone = Utilities.RandomPhone()
             };
-        
+
             context.Payee.Add(payee);
         }
 
-        
-        
+
         context.SaveChanges();
         //seed other tables I.E BillPay and Payee
-
     }
 }
