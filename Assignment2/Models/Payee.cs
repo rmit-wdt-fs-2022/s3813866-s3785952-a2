@@ -19,5 +19,6 @@ public class Payee
 
     [Required] [StringLength(4)] public string Postcode { get; set; }
 
-    [Required] [StringLength(14)] public string Phone { get; set; }
+    [Required] [StringLength(14)] [RegularExpression(@"\(04\) \d{4}")] 
+    public string Phone { get; set; }
 }

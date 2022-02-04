@@ -6,7 +6,7 @@
 }
 <h1>Create Bill Pay</h1>
 
-<form asp-action="CreateBillPay">
+<form asp-action="CreateNewBillPay">
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
@@ -23,10 +23,10 @@
                 <label asp-for="Period" class="control-label"> Enter An Period To Be Paid</label>
                 <select id="Period" name="Period">
                     <option disabled>Please select one</option>
-                    <option value="1">One Off</option>
-                    <option value="2">Monthly </option>
+                    <option value="OneOff">One Off</option>
+                    <option value="Monthly">Monthly </option>
                 </select>
-                <input asp-for="SelectedAccountNumber" value="@Model.SelectedAccountNumber"/>
+                <input type="hidden" asp-for="SelectedAccountNumber" value="@Model.SelectedAccountNumber"/>
 
 
             </div>

@@ -80,6 +80,12 @@
                 <td class="text-center" style="padding:0 15px 0 15px;">
                     @payee.Period
                 </td>
+                <td>
+                    <div class="form-group">
+                         <input type="hidden" name="accountNum" value="@payee.BillPayId"/>
+                        <a asp-action="EditBillPay" type="submit" class="ml-5 btn btn-primary" asp-route-id="@payee.BillPayId">Edit Bill Pay</a>
+                    </div>
+                </td>
             </tr>
         }
     </table>
@@ -87,11 +93,20 @@
 
     <td class="text-center" style="padding:0 15px 0 15px;">
         <form asp-action="CreateBillPay">
-            <div class="form-group">
-                @Html.HiddenFor(x => x.SelectedAccountNumber)
-                <input type="submit" value="Confirm" class="ml-5 btn btn-primary"/>
-                <br/>
-                <a asp-action="Index">Bill Pay</a>
+            <div class="col-md-6 button-deposit-right">
+                <div class="form-group">
+                    @Html.HiddenFor(x => x.SelectedAccountNumber)
+                    <input type="submit" value="Create Bill Pay" class="ml-5 btn btn-primary"/>
+                </div>
+            </div>
+            <div class="col-md-6 button-deposit-left">
+                <div class=" col-md-6">
+                    <div class="form-group">
+                        <a asp-action="Index" class="btn btn-block btn-danger">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
             </div>
         </form>
     </td>

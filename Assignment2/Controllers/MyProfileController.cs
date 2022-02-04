@@ -62,43 +62,6 @@ public class MyProfile : Controller
         return View("MyProfile");
     }
 
-    // to be done for page no customer in db additional check
-    /*if (customer == null)
-    {
-        ViewBag.ErrorMessage = $"User with Id = {customer} cannot be found";
-        return View("NotFound");
-    }#1#
-    //else
-    //{
-}
-
-
-[HttpPost]
-public async Task<IActionResult> EditPassword(string password, string confirmPassword)
-{
-    var login = await _context.Login.FindAsync(CustomerId);
-
-    if (password.Equals(confirmPassword))
-    {
-        login.PasswordHash = PBKDF2.Hash(password);
-        await _context.SaveChangesAsync();
-        ModelState.Clear();
-        return View("ChangePassword");
-
-
-    }
-    return View("ChangePassword");
-
-    // to be done for page no customer in db additional check
-    /*if (customer == null)
-    {
-        ViewBag.ErrorMessage = $"User with Id = {customer} cannot be found";
-        return View("NotFound");
-    }#1#
-    //else
-    //{
-}*/
-
     public async Task<IActionResult> Home()
     {
         return RedirectToAction("Index", "Customer");
