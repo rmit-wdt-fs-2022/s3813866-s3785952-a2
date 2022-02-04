@@ -181,6 +181,8 @@ public class CustomerController : Controller
         {
             ModelState.AddModelError(nameof(transfer.Amount), "Account does not exist.");
         }
+        // if (Convert.ToInt32(transfer.DestinationAccountNum))
+        
         if (transfer.Amount <= 0)
             ModelState.AddModelError(nameof(transfer.Amount), "Amount must be positive.");
         if (transfer.Amount.TwoDecimalPlacesCheck())

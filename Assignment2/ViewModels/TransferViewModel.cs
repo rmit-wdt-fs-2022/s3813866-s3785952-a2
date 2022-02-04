@@ -12,6 +12,7 @@ public class TransferViewModel
     [Required]
     public int AccountNum { get; set; }
     
+    [RegularExpression(@"[0-9]*$", ErrorMessage = "Please enter a valid number ")]
     [Required]
     public int DestinationAccountNum { get; set; }
     

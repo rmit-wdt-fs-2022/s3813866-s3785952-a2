@@ -65,7 +65,8 @@
                                            data-val="true" data-val-number="The field Account must be a number."
                                            data-val-required="The Account field is required."
                                            placeholder="Enter Target Account Number"/>
-                                    @Html.ValidationMessage("AccountNumber", new {@class = "text-danger"})
+                                                       <span asp-validation-for="DestinationAccountNum" class="text-danger"></span>
+                                                            <span asp-validation-for="AccountNum" class="text-danger"></span>
                                     <label asp-for="Comment" class="control-label"> Enter A Comment</label>
                                     <input asp-for="Comment" class="form-control" value="@ViewBag.Comment" placeholder="Add A Comment"/>
 
