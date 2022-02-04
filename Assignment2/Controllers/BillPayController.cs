@@ -37,7 +37,7 @@ public class BillPayController : Controller
                 AccountNumber = viewModel.SelectedAccountNumber,
                 PayeeId = viewModel.PayeeId,
                 Amount = viewModel.Amount,
-                ScheduleTimeUtc = viewModel.ScheduleTimeUtc,
+                ScheduleTimeUtc = viewModel.ScheduleTimeUtc.ToUniversalTime(),
                 Period = (Period) viewModel.Period
             });
 
@@ -61,14 +61,19 @@ public class BillPayController : Controller
 
         var model = new BillPayViewModel
         {
-            BillPay = billPay
+            BillPayId = billPay.BillPayId,
+            PayeeId = billPay.PayeeId,
+            AccountNumber = billPay.AccountNumber,
+            Amount = billPay.Amount,
+            ScheduleTimeUtc = billPay.ScheduleTimeUtc.ToLocalTime(),
+            Period = billPay.Period
         };
 
         return View("EditBillPay", model);
     }
 
     [HttpPost]
-    public async Task<IActionResult> EditBillPay(BillPay model)
+    public async Task<IActionResult> EditBillPay(BillPayViewModel model)
     {
         var billPay = await _context.BillPay.FindAsync(model.BillPayId);
 
@@ -77,14 +82,11 @@ public class BillPayController : Controller
             billPay.AccountNumber = model.AccountNumber;
             billPay.PayeeId = model.PayeeId;
             billPay.Amount = model.Amount;
-            billPay.ScheduleTimeUtc = model.ScheduleTimeUtc;
-            billPay.Period = model.Period;
+            billPay.ScheduleTimeUtc = model.ScheduleTimeUtc.ToUniversalTime();
+            billPay.Period = (Period) model.Period;
 
             await _context.SaveChangesAsync();
-
-            ModelState.Clear();
-
-            return View("EditBillPay");
+            Home();
         }
 
         return View("EditBillPay");

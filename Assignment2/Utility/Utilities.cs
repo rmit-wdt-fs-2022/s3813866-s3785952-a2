@@ -29,14 +29,12 @@ public static class Utilities
                 case 'T' when t.DestinationAccount != null:
                     amount -= t.Amount;
                     break;
-                case 'W' or 'S':
+                case 'W' or 'S' or 'B':
                     amount -= t.Amount;
                     break;
                 default:
                     continue;
             }
-        // add more for billpay
-
         return amount;
     }
 

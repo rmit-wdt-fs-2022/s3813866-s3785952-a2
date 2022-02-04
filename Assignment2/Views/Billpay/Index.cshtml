@@ -82,8 +82,13 @@
                 </td>
                 <td>
                     <div class="form-group">
-                         <input type="hidden" name="accountNum" value="@payee.BillPayId"/>
-                        <a asp-action="EditBillPay" type="submit" class="ml-5 btn btn-primary" asp-route-id="@payee.BillPayId">Edit Bill Pay</a>
+                        <form asp-action="EditBillPay">
+                        
+                            </form>
+                        
+
+                        <input type="hidden" value="@payee.BillPayId"/>
+                        <a asp-action="EditBillPay" type="submit" class="ml-5 btn btn-primary" asp-route-billPayId="@payee.BillPayId">Edit Bill Pay</a>
                     </div>
                 </td>
             </tr>

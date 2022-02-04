@@ -26,4 +26,7 @@ public class BillPay
     [Required] public DateTime ScheduleTimeUtc { get; set; }
 
     [Required] public Period Period { get; set; }
+    
+    
+    
 }

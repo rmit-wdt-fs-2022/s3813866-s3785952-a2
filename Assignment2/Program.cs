@@ -1,3 +1,4 @@
+using Assignment2.BackgroundServices;
 using Assignment2.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<ModelDbContext>(options =>
     options.UseLazyLoadingProxies();
 });
 
+builder.Services.AddHostedService<BillPayBackGroundService>();
 
 //Store sessions
 builder.Services.AddDistributedMemoryCache();

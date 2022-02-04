@@ -19,4 +19,5 @@ public static class Constants
     public const char ServiceFee = 'S';
     public const char Deposit = 'D';
     public const char Transfer = 'T';
+    public const char BillPay = 'B';
 }
