@@ -1,8 +1,5 @@
 ﻿@using Assignment2.Utility
-@model Account
-@{
-    ViewData["Title"] = "Deposit";
-}
+@model Assignment2.Models.ViewModels.TransferViewModel
 
 <div class="container-fluid">
     <div class="row">
@@ -29,18 +26,18 @@
                         <tbody>
                         <tr>
                             <td>
-                                @Model.AccountNumber
+                                @Model.CurrentAccount.AccountNumber
                             </td>
                             <td>
                                 @{
                                     string? accountType = null;
-                                    char savings = 'S';
-                                    char checking = 'C';
-                                    if (Model.AccountType.Equals(savings))
+                                    var savings = 'S';
+                                    var checking = 'C';
+                                    if (Model.CurrentAccount.AccountType.Equals(savings))
                                     {
                                         accountType = "Savings";
                                     }
-                                    else if (Model.AccountType.Equals(checking))
+                                    else if (Model.CurrentAccount.AccountType.Equals(checking))
                                     {
                                         accountType = "Checking";
                                     }
@@ -48,7 +45,7 @@
                                 <a>@accountType</a>
                             </td>
                             <td>
-                                @Model.Transactions.CalculateAccountBalance().ToString("C")
+                                @Model.CurrentAccount.Transactions.CalculateAccountBalance().ToString("C")
                             </td>
                         </tr>
                         </tbody>
@@ -62,21 +59,23 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="AccountNumber" class="control-label">Enter Target Account Number :</label>
-                                    <input id="AccountNumber" name="AccountNumber" class="form-control" value="@ViewBag.AccountNumber"
+                                    <label asp-for="DestinationAccountNum" class="control-label">Enter Target Account Number :</label>
+                                    <input asp-for="DestinationAccountNum" class="form-control" value="@ViewBag.DestinationAccountNum"
                                            data-val="true" data-val-number="The field Account must be a number."
                                            data-val-required="The Account field is required."
                                            placeholder="Enter Target Account Number"/>
-                                    @Html.ValidationMessage("AccountNumber", new {@class = "text-danger"})
-                                    <label for="Comment" class="control-label"> Enter A Comment</label>
-                                    <input id="Comment" name="Comment" class="form-control" placeholder="Add A Comment"/>
+                                    <span asp-validation-for="DestinationAccountNum" class="text-danger"></span>
+                                    <span asp-validation-for="AccountNum" class="text-danger"></span>
+                                    <label asp-for="Comment" class="control-label"> Enter A Comment</label>
+                                    <input asp-for="Comment" class="form-control" value="@ViewBag.Comment" placeholder="Add A Comment"/>
 
-                                    <label for="Amount" class="control-label">Enter A Amount To Be Transfered : </label>
-                                    <input id="Amount" name="Amount" class="form-control" value="@ViewBag.Amount?.ToString("0.00")"
+                                    <label asp-for="Amount" class="control-label">Enter A Amount To Be Transfered : </label>
+                                    <input asp-for="Amount" class="form-control" value="@ViewBag.Amount?.ToString("0.00")"
                                            data-val="true" data-val-number="The field Amount must be a number."
                                            data-val-required="The Amount field is required."
                                            placeholder="Enter Amount To be Transferred"/>
                                     @Html.ValidationMessage("Amount", new {@class = "text-danger"})
+                                    <input type="hidden" asp-for="AccountNum" value="@Model.CurrentAccount.AccountNumber"/>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +104,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}

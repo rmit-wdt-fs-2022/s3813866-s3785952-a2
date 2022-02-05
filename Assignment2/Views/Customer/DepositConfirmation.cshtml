@@ -1,0 +1,35 @@
+﻿@model Assignment2.Models.ViewModels.DepositWithdrawViewModel
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="text-center ">
+                Comfirmation
+            </h3>
+            <br/>
+            <h4>Transaction type: Deposit</h4>
+            <br/>
+            <h4>Amount: @Model.Amount</h4>
+            <br>
+            <h4>Comment: @Model.Comment</h4>
+
+            <div>
+                <form asp-action="DepositConfirmation">
+                    <div class="form-group">
+                        @Html.HiddenFor(x => x.Amount)
+                        @Html.HiddenFor(x => x.AccountNum)
+                        @Html.HiddenFor(x => x.Comment)
+
+                        <input type="submit" value="Confirm" class="ml-5 btn btn-primary"/>
+                        <br/>
+                        <a asp-action="Index">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

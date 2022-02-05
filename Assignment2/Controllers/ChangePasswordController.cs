@@ -12,9 +12,12 @@ public class ChangePassword : Controller
     {
         _context = context;
     }
-    
-    public IActionResult EditPassword() => View();
-    
+
+    public IActionResult EditPassword()
+    {
+        return View();
+    }
+
     [HttpPost]
     public async Task<IActionResult> EditPassword(string password, string confirmPassword)
     {
@@ -27,18 +30,15 @@ public class ChangePassword : Controller
             ModelState.AddModelError("ConfirmPassword", "Passwords Do Not Match.");
             return View("EditPassword");
         }
-        else
-        {
-            login.PasswordHash = PBKDF2.Hash(password);
-            await _context.SaveChangesAsync();
-            ModelState.Clear();
-            return View("EditPassword");
-        }
+
+        login.PasswordHash = PBKDF2.Hash(password);
+        await _context.SaveChangesAsync();
+        ModelState.Clear();
+        return View("EditPassword");
     }
-    
+
     public async Task<IActionResult> Home()
     {
         return RedirectToAction("Index", "Customer");
     }
-    
 }

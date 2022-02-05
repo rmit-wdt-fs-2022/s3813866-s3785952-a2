@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 
-function tabify (target) {
+function tabify(target) {
     // (A) GET HEADERS & CONTENTS
     let wrapper = document.getElementById(target),
         header = document.querySelector(`#${target} > ul`),
@@ -13,11 +13,11 @@ function tabify (target) {
     // (B) ADD CSS + ONCLICK TOGGLE
     wrapper.classList.add("tabWrap");
     header.classList.add("tabHead");
-    for (let i=0; i<headtabs.length; i++) {
+    for (let i = 0; i < headtabs.length; i++) {
         bodytabs[i].classList.add("tabBody");
         headtabs[i].onclick = () => {
-            for (let j=0; j<headtabs.length; j++) {
-                if (i==j) {
+            for (let j = 0; j < headtabs.length; j++) {
+                if (i == j) {
                     headtabs[j].classList.add("open");
                     bodytabs[j].classList.add("open");
                 } else {
@@ -42,9 +42,9 @@ window.onload = () => {
 
 // LOGIN 
 
-$(function() {
+$(function () {
 
-    $("input[type='password'][data-eye]").each(function(i) {
+    $("input[type='password'][data-eye]").each(function (i) {
         var $this = $(this),
             id = 'eye-password-' + i,
             el = $('#' + id);
@@ -60,7 +60,7 @@ $(function() {
         $this.after($("<div/>", {
             html: 'Show',
             class: 'btn btn-primary btn-sm',
-            id: 'passeye-toggle-'+i,
+            id: 'passeye-toggle-' + i,
         }).css({
             position: 'absolute',
             right: 10,
@@ -77,28 +77,28 @@ $(function() {
 
         var invalid_feedback = $this.parent().parent().find('.invalid-feedback');
 
-        if(invalid_feedback.length) {
+        if (invalid_feedback.length) {
             $this.after(invalid_feedback.clone());
         }
 
-        $this.on("keyup paste", function() {
-            $("#passeye-"+i).val($(this).val());
+        $this.on("keyup paste", function () {
+            $("#passeye-" + i).val($(this).val());
         });
-        $("#passeye-toggle-"+i).on("click", function() {
-            if($this.hasClass("show")) {
+        $("#passeye-toggle-" + i).on("click", function () {
+            if ($this.hasClass("show")) {
                 $this.attr('type', 'password');
                 $this.removeClass("show");
                 $(this).removeClass("btn-outline-primary");
-            }else{
+            } else {
                 $this.attr('type', 'text');
-                $this.val($("#passeye-"+i).val());
+                $this.val($("#passeye-" + i).val());
                 $this.addClass("show");
                 $(this).addClass("btn-outline-primary");
             }
         });
     });
 
-    $(".my-login-validation").submit(function() {
+    $(".my-login-validation").submit(function () {
         var form = $(this);
         if (form[0].checkValidity() === false) {
             event.preventDefault();
