@@ -20,4 +20,5 @@ public static class Constants
     public const char Deposit = 'D';
     public const char Transfer = 'T';
     public const char BillPay = 'B';
+    public const char Failed = 'F';
 }
