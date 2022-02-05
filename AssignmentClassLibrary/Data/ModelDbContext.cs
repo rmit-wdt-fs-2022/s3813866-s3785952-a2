@@ -1,12 +1,13 @@
-﻿using Assignment2.Models;
+﻿using AssignmentClassLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Assignment2.Data;
+namespace AssignmentClassLibrary.Data;
 
 public class ModelDbContext : DbContext
 {
     public ModelDbContext(DbContextOptions<ModelDbContext> options) : base(options)
     {
+
     }
 
     public DbSet<Customer> Customer { get; set; }

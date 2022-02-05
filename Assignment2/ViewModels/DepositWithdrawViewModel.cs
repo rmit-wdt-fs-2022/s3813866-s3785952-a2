@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AssignmentClassLibrary.Models;
 
-namespace Assignment2.Models.ViewModels;
+namespace Assignment2.ViewModels;
 
 public class DepositWithdrawViewModel
 {

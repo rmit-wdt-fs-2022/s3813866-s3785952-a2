@@ -1,5 +1,5 @@
-﻿using Assignment2.Data;
-using Assignment2.Models;
+﻿using AssignmentClassLibrary.Data;
+using AssignmentClassLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using SimpleHashing;
 

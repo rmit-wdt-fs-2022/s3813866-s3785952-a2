@@ -1,4 +1,4 @@
-﻿using Assignment2.Models;
+﻿using AssignmentClassLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 

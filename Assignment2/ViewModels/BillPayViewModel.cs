@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Assignment2.Utility;
+using AssignmentClassLibrary.Models;
 
-namespace Assignment2.Models.ViewModels;
+namespace Assignment2.ViewModels;
 
 public class BillPayViewModel
 {

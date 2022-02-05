@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
-namespace Assignment2.Models;
+namespace AssignmentClassLibrary.Models;
 
 public enum TransactionType
 {
@@ -22,11 +23,10 @@ public class Transaction
     [Required] public char TransactionType { get; set; }
 
     [Required] [ForeignKey("Account")] public int AccountNumber { get; set; }
-
-    public virtual Account Account { get; set; }
+    [JsonIgnore] public virtual Account Account { get; set; }
 
     [ForeignKey("DestinationAccount")] public int? DestinationAccountNumber { get; set; }
-
+    [JsonIgnore]
     public virtual Account? DestinationAccount { get; set; }
 
     [Required]
@@ -35,7 +35,7 @@ public class Transaction
 
     [StringLength(30)] public string? Comment { get; set; }
 
-    [Required] 
+    [Required]
     [DisplayName("Transaction Time")]
     public DateTime TransactionTimeUtc { get; set; }
 }
