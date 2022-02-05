@@ -10,7 +10,7 @@ public class TransactionsRepository
     private readonly ModelDbContext _dbContext;
 
     public TransactionsRepository(ModelDbContext dbContext) => _dbContext = dbContext;
-
+    
     public async Task<List<Transaction>> GetAllTransactions() => await _dbContext.Transaction.ToListAsync();
 
     public List<Transaction> GetTransactionsByAccountNumber(int accountNumber, DateTime? start, DateTime? end)
