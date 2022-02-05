@@ -43,3 +43,6 @@ model.  Within the Customer model which is within the class library.
 
 ![image](https://user-images.githubusercontent.com/57212703/152641472-0a76b797-1d79-42e6-b292-9f1130b38427.png)
 
+![image](https://user-images.githubusercontent.com/57212703/152642292-b453c4cf-312a-4e59-a4e5-335e9d4018ea.png)
+
+
