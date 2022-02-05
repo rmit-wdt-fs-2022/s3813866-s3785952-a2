@@ -1,6 +1,5 @@
 ﻿using Assignment2.DTO;
 using Assignment2.Models;
-using Assignment2.Utility;
 using Newtonsoft.Json;
 
 namespace Assignment2.Data;
@@ -9,15 +8,16 @@ public class SeedData
 {
     public static void SaveCustomerInDb(IServiceProvider serviceProvider)
     {
+        
         var context = serviceProvider.GetRequiredService<ModelDbContext>();
-
+    
         // Look for any movies.
         Console.WriteLine("here");
-        if (context.Customer.Any())
+        if(context.Customer.Any())
             return; // DB has already been seeded.
         Console.WriteLine("here1");
         const string Url = "https://coreteaching01.csit.rmit.edu.au/~e103884/wdt/services/customers/";
-
+    
         // Contact webservice.
         using var client = new HttpClient();
         var json = client.GetStringAsync(Url).Result;
@@ -57,35 +57,23 @@ public class SeedData
             }
         });
 
-        var enumerable = customers as Customer[] ?? customers.ToArray();
-        foreach (var customer in enumerable)
+        foreach (var customer in customers)
         {
             context.Customer.Add(customer);
             context.Login.Add(customer.Login);
             foreach (var account in customer.Accounts)
             {
                 context.Account.Add(account);
-                foreach (var transaction in account.Transactions) context.Transaction.Add(transaction);
+                foreach (var transaction in account.Transactions)
+                {
+                    context.Transaction.Add(transaction);
+                }
             }
+        
         }
-
-        foreach (var c in enumerable)
-        {
-            var payee = new Payee
-            {
-                Name = Utilities.RandomCompanyName(),
-                Address = Utilities.RandomAddress(),
-                Suburb = Utilities.RandomSuburb(),
-                State = "VIC",
-                Postcode = Utilities.RandomPostcode(),
-                Phone = Utilities.RandomPhone()
-            };
-
-            context.Payee.Add(payee);
-        }
-
 
         context.SaveChanges();
         //seed other tables I.E BillPay and Payee
+
     }
 }
