@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Assignment2.Utility;
 
 namespace Assignment2.Models;
 
@@ -21,6 +22,7 @@ public class BillPay
 
     [Required]
     [Column(TypeName = "money")]
+    [ModelAttributes.IsANumber(@"(^[0-9]+$)", ErrorMessage = "Amount must be a number")]
     public decimal Amount { get; set; }
 
     [Required] public DateTime ScheduleTimeUtc { get; set; }
