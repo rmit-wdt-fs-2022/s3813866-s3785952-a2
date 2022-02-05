@@ -1,7 +1,7 @@
 ﻿@model Assignment2.Models.ViewModels.BillPayViewModel
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Edit Bill Pay";
     Layout = "_Layout";
 }
 
@@ -10,14 +10,14 @@
     <div class="form-group row">
         <label asp-for="AccountNumber" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="AccountNumber" class="form-control" placeholder="Tax File Number" required value=@Model.AccountNumber>
+            <input asp-for="AccountNumber" class="form-control" placeholder="AccountNumber" required value=@Model.AccountNumber>
             <span asp-validation-for="AccountNumber" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
         <label asp-for="PayeeId" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="PayeeId" class="form-control" placeholder="Address" required value=@Model.PayeeId>
+            <input asp-for="PayeeId" class="form-control" placeholder="PayeeId" required value=@Model.PayeeId>
             <span asp-validation-for="PayeeId" class="text-danger"></span>
 
         </div>
@@ -26,7 +26,7 @@
     <div class="form-group row">
         <label asp-for="Amount" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="Amount" class="form-control" placeholder="Suburb" required value=@Model.Amount>
+            <input asp-for="Amount" class="form-control" placeholder="Amount" required value=@Model.Amount.ToString("0.00")>
             <span asp-validation-for="Amount" class="text-danger"></span>
 
         </div>
@@ -35,17 +35,21 @@
     <div class="form-group row">
         <label asp-for="ScheduleTimeUtc" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="ScheduleTimeUtc" class="form-control" placeholder="State" required value=@Model.ScheduleTimeUtc>
+            <input asp-for="ScheduleTimeUtc" class="form-control" placeholder="Schedule Time" required value=@Model.ScheduleTimeUtc>
             <span asp-validation-for="ScheduleTimeUtc" class="text-danger"></span>
         </div>
     </div>
 
     <div class="form-group row">
-        <label asp-for="Period" class="col-sm-2 col-form-label"></label>
+        <label asp-for="Period" class="control-label">Period</label>
         <div class="col-sm-10">
-            <input asp-for="Period" class="form-control" placeholder="PostCode" required value=@Model.Period>
-            <span asp-validation-for="Period" class="text-danger"></span>
+            <select id="Period" name="Period">
+                <option disabled>Please select one</option>
+                <option value="OneOff">One Off</option>
+                <option value="Monthly">Monthly </option>
+            </select>
         </div>
+        <span asp-validation-for="Period" class="text-danger"></span>
     </div>
 
     <div class="form-group row">
@@ -54,6 +58,7 @@
                 <div class="col-sm-10 text-center">
                     <button type="submit" asp-action="EditBillPay" class="btn btn-primary">Update</button>
                     <a asp-action="Home" class="btn btn-primary">Back</a>
+                    <a asp-action="CancelBillPay" class="btn btn-primary" asp-route-billPayId=@Model.BillPayId>Cancel</a>
                 </div>
             </div>
         </div>
