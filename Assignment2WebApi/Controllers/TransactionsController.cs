@@ -20,6 +20,6 @@ public class TransactionsController : ControllerBase
 
     [HttpGet]
     [Route("{accountNumber:int}")]
-    public List<Transaction> GetTransactionsByAccountNumber(int accountNumber, DateTime? start, DateTime? end) => _transactionsRepository.GetTransactionsByAccountNumber(accountNumber, start, end);
-
+    public List<Transaction> GetTransactionsByAccountNumber(int accountNumber, DateTime? start, DateTime? end) =>
+        _transactionsRepository.GetTransactionsByAccountNumber(accountNumber, start, end);
 }
