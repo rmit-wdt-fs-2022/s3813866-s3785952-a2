@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Assignment2.Utility;
 
 namespace Assignment2.Models;
 
@@ -11,21 +12,23 @@ public enum Period
 
 public class BillPay
 {
-    [Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Required]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int BillPayId { get; set; }
-    
-    [Required, ForeignKey("Account")]
-    public int AccountNumber { get; set; }
-    
-    [Required, ForeignKey("Payee")]
-    public int PayeeId { get; set; }
-    
-    [Required, Column(TypeName = "money")]
-    public decimal Amount {get; set;}
-    
+
+    [Required] [ForeignKey("Account")] public int AccountNumber { get; set; }
+
+    [Required] [ForeignKey("Payee")] public int PayeeId { get; set; }
+
     [Required]
-    public DateTime ScheduleTimeUtc {get; set;}
+    [Column(TypeName = "money")]
+    [ModelAttributes.IsANumber(@"(^[0-9]+$)", ErrorMessage = "Amount must be a number")]
+    public decimal Amount { get; set; }
+
+    [Required] public DateTime ScheduleTimeUtc { get; set; }
+
+    [Required] public Period Period { get; set; }
     
-    [Required]
-    public Period Period {get; set;}
+    
+    
 }

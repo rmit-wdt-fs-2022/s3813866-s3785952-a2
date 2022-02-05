@@ -1,0 +1,65 @@
+﻿@model Assignment2.Models.ViewModels.BillPayViewModel
+
+@{
+    ViewBag.Title = "Create Bill Pay";
+    Layout = "_Layout";
+}
+<h1>Create Bill Pay</h1>
+
+<form asp-action="CreateNewBillPay">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+
+                <label asp-for="PayeeId" class="control-label">Enter PayeeId</label>
+                <input asp-for="PayeeId" class="form-control" value="@ViewBag.PayeeId" placeholder="Enter PayeeId To Pay"/>
+                <span asp-validation-for="PayeeId" class="text-danger"></span>
+
+
+                <label asp-for="Amount" class="control-label">Enter An Amount To Send</label>
+                <input asp-for="Amount" class="form-control" value="@ViewBag.Amount" placeholder="Enter An Amount To Send"/>
+                <span asp-validation-for="Amount" class="text-danger"></span>
+
+
+                <label asp-for="ScheduleTimeUtc" class="control-label">Enter A Date To Be Paid</label>
+                <input asp-for="ScheduleTimeUtc" class="form-control" value="@ViewBag.ScheduleTimeUtc" placeholder="Enter A Date To Be Paid"/>
+                <span asp-validation-for="ScheduleTimeUtc" class="text-danger"></span>
+
+
+                <label asp-for="Period" class="control-label"> Enter An Period To Be Paid</label>
+                <select id="Period" name="Period">
+                    <option disabled>Please select one</option>
+                    <option value="OneOff">One Off</option>
+                    <option value="Monthly">Monthly </option>
+                </select>
+                <span asp-validation-for="Period" class="text-danger"></span>
+
+                <input type="hidden" asp-for="SelectedAccountNumber" value="@Model.SelectedAccountNumber"/>
+
+
+            </div>
+        </div>
+    </div>
+    <div row>
+        <form asp-action="CreateNewBillPay">
+            <div class="col-md-6 button-deposit-right">
+                <div class=" col-md-6">
+                    <div class="form-group">
+                        <input type="submit" value="Create Bill Pay" class="btn btn-primary"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="col-md-6 button-deposit-left">
+            <div class=" col-md-6">
+                <div class="form-group">
+                    <a asp-action="Index" class="btn btn-block btn-danger">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
