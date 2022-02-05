@@ -205,7 +205,8 @@ public class CustomerController : Controller
         transfer.DestinationAccount = destionationAccount;
         return View("TransferConfirmation", transfer);
     }
-
+    
+    
     [HttpPost]
     public async Task<IActionResult> TransferConfirmation(TransferViewModel transfer)
     {
