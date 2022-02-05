@@ -2,6 +2,7 @@
 
 public class CustomerDTO
 {
+    
     public int CustomerId { get; set; }
     public string Name { get; set; }
     public string address { get; set; }
@@ -9,4 +10,7 @@ public class CustomerDTO
     public string Postcode { get; set; }
     public List<AccountDTO> Accounts { get; set; }
     public LoginDTO Login { get; set; }
+    
+
+    
 }

@@ -11,12 +11,13 @@ public class Login
     [StringLength(8)]
     public string LoginId { get; set; }
 
-    [Required] [ForeignKey("Customer")] public int CustomerId { get; set; }
-
+    [Required]
+    [ForeignKey("Customer")]
+    public int CustomerId { get; set; }
+    
     public virtual Customer? Customer { get; set; }
 
     [Column(TypeName = "char")]
-    [Required]
-    [StringLength(64)]
+    [Required, StringLength(64)]
     public string PasswordHash { get; set; }
 }
