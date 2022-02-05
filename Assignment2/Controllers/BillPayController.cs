@@ -2,6 +2,7 @@
 using Assignment2.Models;
 using Assignment2.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assignment2.Controllers;
 
@@ -31,7 +32,12 @@ public class BillPayController : Controller
 
     public async Task<IActionResult> CreateNewBillPay (BillPayViewModel viewModel)
     {
-        
+        var payee = await _context.Payee.FindAsync(viewModel.PayeeId);
+        if (payee == null) ModelState.AddModelError(nameof(viewModel.PayeeId), "Payee does not exist.");
+        if (viewModel.ScheduleTimeUtc < DateTime.UtcNow) ModelState.AddModelError(nameof(viewModel.ScheduleTimeUtc), "Cannot Set Date in the past");
+
+        if (ModelState.IsValid)
+        {
             _context.Add(new BillPay
             {
                 AccountNumber = viewModel.SelectedAccountNumber,
@@ -45,7 +51,11 @@ public class BillPayController : Controller
 
             ModelState.Clear();
 
-        return RedirectToAction("Index", "Customer");
+            return RedirectToAction("Index", "Customer");
+        }
+
+        return View("CreateBillPay", viewModel);
+
     }
     public async Task<IActionResult> CreateBillPay(BillPayViewModel viewModel)
     {
@@ -76,6 +86,14 @@ public class BillPayController : Controller
     public async Task<IActionResult> EditBillPay(BillPayViewModel model)
     {
         var billPay = await _context.BillPay.FindAsync(model.BillPayId);
+        var destinationAccount = await _context.Account.FindAsync(model.AccountNumber);
+        var payee = await _context.Payee.FindAsync(model.PayeeId);
+        
+        
+        if (destinationAccount == null) ModelState.AddModelError(nameof(billPay.AccountNumber), "Account does not exist.");
+        if (payee == null) ModelState.AddModelError(nameof(billPay.PayeeId), "Payee does not exist.");
+        if (model.ScheduleTimeUtc < DateTime.UtcNow) ModelState.AddModelError(nameof(model.ScheduleTimeUtc), "Cannot Set Date in the past");
+
 
         if (ModelState.IsValid)
         {
@@ -83,13 +101,24 @@ public class BillPayController : Controller
             billPay.PayeeId = model.PayeeId;
             billPay.Amount = model.Amount;
             billPay.ScheduleTimeUtc = model.ScheduleTimeUtc.ToUniversalTime();
-            billPay.Period = (Period) model.Period;
+            billPay.Period = model.Period;
 
             await _context.SaveChangesAsync();
             Home();
         }
 
-        return View("EditBillPay");
+        return View("EditBillPay", model);
+    }
+
+    public async Task<RedirectToActionResult> CancelBillPay(int billPayId)
+    {
+        var billPay = await _context.BillPay.FindAsync(billPayId);
+
+        _context.BillPay.Remove(billPay);
+
+        await _context.SaveChangesAsync();
+        
+        return RedirectToAction("Index", "Customer");
     }
     public async Task<IActionResult> Home()
     {
