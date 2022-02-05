@@ -22,7 +22,7 @@ public class BillPayBackGroundService : BackgroundService
             await DoWork(cancellationToken);
 
 
-            await Task.Delay(TimeSpan.FromMinutes(1), cancellationToken);
+            await Task.Delay(TimeSpan.FromSeconds(10), cancellationToken);
         }
     }
 
@@ -38,24 +38,75 @@ public class BillPayBackGroundService : BackgroundService
             if (billPay.ScheduleTimeUtc < DateTime.UtcNow)
             {
                 var balance = account.Transactions.CalculateAccountBalance();
-                if (balance >= billPay.Amount)
+                if (account.AccountType.Equals(Constants.CheckingAccType))
                 {
-                    account.Transactions.Add(new Transaction
+                    if ((balance-300) >= billPay.Amount)
                     {
-                        TransactionType = Constants.BillPay,
-                        Amount = billPay.Amount,
-                        TransactionTimeUtc = DateTime.UtcNow
-                    });
-                    if (billPay.Period == Period.Monthly)
+                        account.Transactions.Add(new Transaction
+                        {
+                            TransactionType = Constants.BillPay,
+                            Amount = billPay.Amount,
+                            TransactionTimeUtc = DateTime.UtcNow
+                        });
+                        if (billPay.Period == Period.Monthly)
+                        {
+                            billPay.ScheduleTimeUtc = billPay.ScheduleTimeUtc.AddMonths(1);
+                        }
+                        else
+                        {
+                            context.BillPay.Remove(billPay);
+                        }
+                    } else
                     {
-                        billPay.ScheduleTimeUtc = billPay.ScheduleTimeUtc.AddMonths(1);
-                    }
+
+                        account.Transactions.Add(new Transaction
+                        {
+                            TransactionType = Constants.Failed,
+                            TransactionTimeUtc = DateTime.UtcNow,
+                            Comment = "Failed Transaction"
+
+                        });
+                        context.BillPay.Remove(billPay);
+                    }  
+                    await context.SaveChangesAsync(cancellationToken);
+
+                    
+                } else if (account.AccountType.Equals(Constants.SavingAccType))
+                {
+                    if ((balance) >= billPay.Amount)
+                    {
+                        account.Transactions.Add(new Transaction
+                        {
+                            TransactionType = Constants.BillPay,
+                            Amount = billPay.Amount,
+                            TransactionTimeUtc = DateTime.UtcNow
+                        });
+                        if (billPay.Period == Period.Monthly)
+                        {
+                            billPay.ScheduleTimeUtc = billPay.ScheduleTimeUtc.AddMonths(1);
+                        }
+                        else
+                        {
+                            context.BillPay.Remove(billPay);
+                        }
+                        await context.SaveChangesAsync(cancellationToken);
+                    } 
                     else
                     {
+
+                        account.Transactions.Add(new Transaction
+                        {
+                            TransactionType = Constants.Failed,
+                            TransactionTimeUtc = DateTime.UtcNow,
+                            Comment = "Failed Transaction"
+
+                        });
                         context.BillPay.Remove(billPay);
-                    }
+                    }  
                     await context.SaveChangesAsync(cancellationToken);
+                    
                 }
+                
             } 
         }
         
