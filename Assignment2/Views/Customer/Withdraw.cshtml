@@ -1,6 +1,5 @@
 ﻿@using Assignment2.Utility
-@using Assignment2.ViewModels
-@model DepositWithdrawViewModel
+@model Assignment2.Models.ViewModels.DepositWithdrawViewModel
 
 <div class="container-fluid">
     <div class="row">
@@ -32,8 +31,8 @@
                             <td>
                                 @{
                                     string? accountType = null;
-                                    char savings = 'S';
-                                    char checking = 'C';
+                                    var savings = 'S';
+                                    var checking = 'C';
                                     if (Model.CurrentAccount.AccountType.Equals(savings))
                                     {
                                         accountType = "Savings";
@@ -68,20 +67,20 @@
                                     @Html.ValidationMessage("Amount", new {@class = "text-danger"})
                                     <label asp-for="Comment" class="control-label">Add comment (not required) : </label>
                                     <input asp-for="Comment" class="form-control" value="@ViewBag.Comment" placeholder="Add A Comment"/>
-                                    
-                                    <input  type ="hidden" asp-for="AccountNum" value="@Model.CurrentAccount.AccountNumber"/>
+
+                                    <input type="hidden" asp-for="AccountNum" value="@Model.CurrentAccount.AccountNumber"/>
                                     <br/>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                        <div class="col-md-6 button-deposit-right">
-                            <div class=" col-md-6">
-                                <div class="form-group">
-                                    <input type="submit" value="Withdraw" class="btn btn-primary"/>
+                            <div class="col-md-6 button-deposit-right">
+                                <div class=" col-md-6">
+                                    <div class="form-group">
+                                        <input type="submit" value="Withdraw" class="btn btn-primary"/>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                             <div class="col-md-6 button-deposit-left">
                                 <div class=" col-md-6">

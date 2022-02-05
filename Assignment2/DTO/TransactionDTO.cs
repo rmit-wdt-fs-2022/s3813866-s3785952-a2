@@ -2,11 +2,11 @@
 
 public class TransactionDTO
 {
-    public int TransactionId;
-    public char TransactionType;
     public int AccountNumber;
-    public int? DestinationAccountNumber;
     public decimal Amount;
     public string? Comment;
+    public int? DestinationAccountNumber;
+    public int TransactionId;
     public DateTime TransactionTimeUtc;
+    public char TransactionType;
 }

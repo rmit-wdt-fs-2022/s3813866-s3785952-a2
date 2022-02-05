@@ -1,5 +1,4 @@
-﻿@using Assignment2.ViewModels
-@model TransferViewModel
+﻿@model Assignment2.Models.ViewModels.TransferViewModel
 
 <div class="container-fluid">
     <div class="row">
@@ -17,7 +16,7 @@
             <h4>Amount: @Model.Amount</h4>
             <br>
             <h4>Comment: @Model.Comment</h4>
-            
+
             <div>
                 <form asp-action="TransferConfirmation">
                     <div class="form-group">
@@ -25,8 +24,8 @@
                         @Html.HiddenFor(x => x.AccountNum)
                         @Html.HiddenFor(x => x.DestinationAccountNum)
                         @Html.HiddenFor(x => x.Comment)
-                        
-                        <input type="submit" value="Confirm" class="ml-5 btn btn-primary" />
+
+                        <input type="submit" value="Confirm" class="ml-5 btn btn-primary"/>
                         <br/>
                         <a asp-action="Index">Cancel</a>
                     </div>
