@@ -32,7 +32,7 @@ public class BillPayBackGroundService : BackgroundService
         using var scope = _services.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<ModelDbContext>();
         
-         foreach (var billPay  in context.BillPay)
+         foreach (var billPay  in context.BillPay.ToList())
         {
             var account = await context.Account.SingleAsync(bp => bp.AccountNumber==billPay.AccountNumber, cancellationToken);
             if (billPay.ScheduleTimeUtc < DateTime.UtcNow)
