@@ -150,7 +150,6 @@ namespace Assignment2.Migrations
                 table: "Transaction",
                 column: "DestinationAccountNumber");
         }
-
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

@@ -1,0 +1,12 @@
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\bin\Debug\net6.0\AssignmentClassLibrary.deps.json
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\bin\Debug\net6.0\AssignmentClassLibrary.dll
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\bin\Debug\net6.0\ref\AssignmentClassLibrary.dll
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\bin\Debug\net6.0\AssignmentClassLibrary.pdb
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\obj\Debug\net6.0\AssignmentClassLibrary.csproj.AssemblyReference.cache
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\obj\Debug\net6.0\AssignmentClassLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\obj\Debug\net6.0\AssignmentClassLibrary.AssemblyInfoInputs.cache
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\obj\Debug\net6.0\AssignmentClassLibrary.AssemblyInfo.cs
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\obj\Debug\net6.0\AssignmentClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\obj\Debug\net6.0\AssignmentClassLibrary.dll
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\obj\Debug\net6.0\ref\AssignmentClassLibrary.dll
+C:\Users\tandr\RiderProjects\s3813866-s3785952-a2\AssignmentClassLibrary\obj\Debug\net6.0\AssignmentClassLibrary.pdb
