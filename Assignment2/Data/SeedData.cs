@@ -1,6 +1,7 @@
 ﻿using Assignment2.DTO;
-using Assignment2.Models;
 using Assignment2.Utility;
+using AssignmentClassLibrary.Data;
+using AssignmentClassLibrary.Models;
 using Newtonsoft.Json;
 
 namespace Assignment2.Data;

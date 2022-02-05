@@ -1,5 +1,6 @@
 using Assignment2.BackgroundServices;
 using Assignment2.Data;
+using AssignmentClassLibrary.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,11 @@ builder.Services.AddControllersWithViews();
 //establish tables for model
 builder.Services.AddDbContext<ModelDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Main"));
+    
+    
+    
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Main"),
+        x => x.MigrationsAssembly(nameof(AssignmentClassLibrary)));
     options.UseLazyLoadingProxies();
 });
 

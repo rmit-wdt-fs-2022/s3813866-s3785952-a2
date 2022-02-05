@@ -1,8 +1,8 @@
-﻿using Assignment2.Data;
-using Assignment2.Filters;
-using Assignment2.Models;
-using Assignment2.Models.ViewModels;
+﻿using Assignment2.Filters;
 using Assignment2.Utility;
+using Assignment2.ViewModels;
+using AssignmentClassLibrary.Data;
+using AssignmentClassLibrary.Models;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
 
@@ -265,6 +265,9 @@ public class CustomerController : Controller
         var pagedList = await _context.Transaction.Where(x => x.AccountNumber == account.AccountNumber)
             .OrderByDescending(x => x.TransactionTimeUtc).ToPagedListAsync(page, pageSize);
 
+        
+        
+        
         return View(pagedList);
     }
 }

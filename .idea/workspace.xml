@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3038b5d8-9262-4467-a277-cdeda039a97e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Assignment2ClassLibrary.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Class1.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Data/ModelDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Models/Account.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Properties/AssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Utility/Constants.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Utility/ModelAttributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/obj/Debug/.NETFramework,Version=v4.8.AssemblyAttributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/obj/Debug/Assignment2ClassLibrary.csproj.AssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/obj/Debug/Assignment2ClassLibrary.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/obj/Debug/Assignment2ClassLibrary.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/Assignment2WebApi.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/Controllers/TransactionsController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/Program.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/Properties/launchSettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/Repositories/NewFile.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/Repositories/TransactionsRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/appsettings.Development.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/appsettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/Assignment2WebApi.csproj.nuget.dgspec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/Assignment2WebApi.csproj.nuget.g.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/Assignment2WebApi.csproj.nuget.g.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/Debug/net6.0/Assignment2WebApi.AssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/Debug/net6.0/Assignment2WebApi.AssemblyInfoInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/Debug/net6.0/Assignment2WebApi.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/Debug/net6.0/Assignment2WebApi.GlobalUsings.g.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/Debug/net6.0/Assignment2WebApi.assets.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/Debug/net6.0/Assignment2WebApi.csproj.AssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/project.assets.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/project.nuget.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/project.packagespec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assignment2WebApi/obj/rider.project.restore.info" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Data/ModelDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Models/BillPay.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Models/Customer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Models/Login.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Models/Payee.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Models/Transaction.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Utility/Constants.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/Utility/ModelAttributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Assignment2ClassLibrary.csproj.nuget.dgspec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Assignment2ClassLibrary.csproj.nuget.g.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Assignment2ClassLibrary.csproj.nuget.g.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Assignmnet2ClassLibrary.csproj.nuget.dgspec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Assignmnet2ClassLibrary.csproj.nuget.g.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Assignmnet2ClassLibrary.csproj.nuget.g.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/Assignment2ClassLibrary.AssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/Assignment2ClassLibrary.AssemblyInfoInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/Assignment2ClassLibrary.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/Assignment2ClassLibrary.GlobalUsings.g.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/Assignment2ClassLibrary.assets.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/Assignmnet2ClassLibrary.AssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/Assignmnet2ClassLibrary.AssemblyInfoInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/Assignmnet2ClassLibrary.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/Assignmnet2ClassLibrary.GlobalUsings.g.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/Assignmnet2ClassLibrary.assets.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/Assignmnet2ClassLibrary.csproj.AssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/test.AssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/test.AssemblyInfoInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/test.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/test.GlobalUsings.g.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/test.assets.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/Debug/net6.0/test.csproj.AssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/project.assets.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/project.nuget.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/project.packagespec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/rider.project.restore.info" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/test.csproj.nuget.dgspec.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/test.csproj.nuget.g.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/obj/test.csproj.nuget.g.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/test.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/Assignment2/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Assignment2/v17/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Assignment2.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Assignment2.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/BackgroundServices/BillPayBackGroundService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/BackgroundServices/BillPayBackGroundService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Controllers/BillPayController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Controllers/BillPayController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Controllers/ChangePasswordController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Controllers/ChangePasswordController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Controllers/CustomerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Controllers/CustomerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Controllers/HomeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Controllers/HomeController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Controllers/LoginController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Controllers/LoginController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Controllers/MyProfileController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Controllers/MyProfileController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Data/ModelDbContext.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Data/SeedData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Data/SeedData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Filters/CustomerAuth.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Filters/CustomerAuth.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Migrations/20220121095954_model.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Migrations/20220121095954_model.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Migrations/20220121095954_model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Migrations/20220121095954_model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Migrations/ModelDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Migrations/ModelDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Models/Account.cs" beforeDir="false" afterPath="$PROJECT_DIR$/test/Models/Account.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Models/BillPay.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Models/BillPay.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Models/Customer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Models/Customer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Models/Login.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Models/Login.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Models/Payee.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Models/Payee.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Models/Transaction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2ClassLibrary/Models/Transaction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Models/ViewModels/BillPayViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/ViewModels/BillPayViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Models/ViewModels/ChangePasswordViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/ViewModels/ChangePasswordViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Models/ViewModels/DepositWithdrawViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/ViewModels/DepositWithdrawViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Models/ViewModels/ErrorViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/ViewModels/ErrorViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Models/ViewModels/TransferViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/ViewModels/TransferViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Utility/Utilities.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Utility/Utilities.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Billpay/CreateBillPay.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Billpay/CreateBillPay.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Billpay/EditBillPay.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Billpay/EditBillPay.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Billpay/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Billpay/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/ChangePassword/EditPassword.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/ChangePassword/EditPassword.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Customer/Deposit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Customer/Deposit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Customer/DepositConfirmation.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Customer/DepositConfirmation.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Customer/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Customer/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Customer/MyTransactions.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Customer/MyTransactions.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Customer/Transfer.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Customer/Transfer.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Customer/TransferConfirmation.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Customer/TransferConfirmation.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Customer/Withdraw.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Customer/Withdraw.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Customer/WithdrawConfirmation.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Customer/WithdrawConfirmation.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Login/Login.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Login/Login.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/MyProfile/MyProfile.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/MyProfile/MyProfile.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Shared/Error.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Shared/Error.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assignment2/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Assignment2/Views/Shared/_Layout.cshtml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="24gSFySHrP5cjawh6ga4i2LSxKX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3038b5d8-9262-4467-a277-cdeda039a97e" name="Changes" comment="" />
+      <created>1644050639882</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1644050639882</updated>
+      <workItem from="1644050643573" duration="61000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

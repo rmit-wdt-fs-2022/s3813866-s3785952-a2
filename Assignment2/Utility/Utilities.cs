@@ -1,4 +1,4 @@
-﻿using Assignment2.Models;
+﻿using AssignmentClassLibrary.Models;
 using Faker;
 
 namespace Assignment2.Utility;
